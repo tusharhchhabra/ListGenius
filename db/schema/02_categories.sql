@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS categories CASCADE;
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  owner_id INTEGER references users(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL
+);
