@@ -3,8 +3,10 @@ require('dotenv').config();
 
 // Web server config
 const sassMiddleware = require('./lib/sass-middleware');
+const cookieSession = require('cookie-session');
 const express = require('express');
 const morgan = require('morgan');
+
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -23,15 +25,33 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key']
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+// const authenticate = require("./routes/authenticate");
 const userApiRoutes = require('./routes/users-api');
+// const categoriesApiRoutes = require('./routes/categories-api');
+// const itemsApiRoutes = require('./routes/new-item-api');
+// const itemsForCategoryApiRoutes = require("./routes/itemsForCategory-api");
+// const assignCategoryApiRoutes = require('./routes/assign-category-api');
+// const profileAPIRoutes = require('./routes/profile-api');
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
+// app.use('/login/:id', authenticate); /// Issue?
+// app.use('/api/users', userApiRoutes);
+// app.use('/api/categories', categoriesApiRoutes);
+// app.use('/api/items', itemsApiRoutes);
+// app.use('/api/itemsforcategory', itemsForCategoryApiRoutes); // Issues?
+// app.use('/api/assigncategory', assignCategoryApiRoutes);
+// app.use('/api/profile', profileAPIRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
