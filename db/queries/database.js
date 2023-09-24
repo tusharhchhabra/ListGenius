@@ -9,10 +9,15 @@ const getUsers = (id) => {
     });
 };
 
-/* Fetch Categories */
+/* Fetch Categories and count of all items in that particular*/
 
 const getCategory = (id) => {
-  const query = `SELECT * FROM categories WHERE owner_id = $1 ;`;
+  const query = `SELECT categories.*, COUNT(items.id) AS total_items
+  FROM categories
+  JOIN items
+  ON categories.id = categories_id
+  WHERE categories.id = $1
+  GROUP BY categories.id;`;
   return db.query(query,[id])
     .then(data => {
       return data.rows[0];
@@ -39,8 +44,28 @@ const getItem = (categoryId) => {
     });
 };
 
+/* List all items from a user */
+
+const getAllItemsOfUser = (userId) => {
+  const query = `SELECT *
+  FROM items
+  JOIN users
+  ON users.id = owner_id
+  WHERE users.id = $1;`
+  return db.query(query,[userId])
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
+
 module.exports = {
   getUsers,
   getCategory,
-  getItem
+  getItem,
+  getAllItemsOfUser
 };
