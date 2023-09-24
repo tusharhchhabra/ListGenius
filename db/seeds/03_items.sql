@@ -1,12 +1,10 @@
--- Not sure why but when seeding the users, no user with id 1 was made?
-
 INSERT INTO items (owner_id, categories_id, name) VALUES
-  (2, 1, 'Inception'),
-  (2, 1, 'The Shawshank Redemption'),
-  (2, 1, 'Pulp Fiction'),
-  (2, 2, 'Pizza'),
-  (2, 2, 'Sushi'),
-  (2, 2, 'Burger'),
+  (1, 1, 'Inception'),
+  (1, 1, 'The Shawshank Redemption'),
+  (1, 1, 'Pulp Fiction'),
+  (1, 2, 'Pizza Hut'),
+  (2, 2, 'Sushi King'),
+  (2, 2, 'Burger Queen'),
   (3, 3, 'To Kill a Mockingbird'),
   (3, 3, '1984'),
   (3, 3, 'The Great Gatsby'),
@@ -16,12 +14,19 @@ INSERT INTO items (owner_id, categories_id, name) VALUES
   (5, 1, 'The Matrix'),
   (5, 1, 'The Godfather'),
   (5, 1, 'The Dark Knight'),
-  (6, 2, 'Sushi'),
-  (6, 2, 'Burger'),
-  (6, 2, 'Salad'),
+  (6, 2, 'Sushi King'),
+  (6, 2, 'Burger Queen'),
+  (6, 2, 'Salad Masters'),
   (7, 3, 'Harry Potter and the Sorcerer''s Stone'),
   (7, 3, 'The Catcher in the Rye'),
   (7, 3, 'Moby-Dick'),
   (8, 4, 'Books'),
   (8, 4, 'Furniture'),
-  (8, 4, 'Appliances');
+  (8, 4, 'Appliances'),
+  (9, 1, 'Avatar'),
+  (9, 1, 'The Lord of the Rings'),
+  (9, 1, 'The Avengers'),
+  (10, 1, 'Interstellar'),
+  (10, 1, 'The Green Mile'),
+  (10, 1, 'Fight Club');
+
