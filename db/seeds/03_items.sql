@@ -1,0 +1,27 @@
+-- Not sure why but when seeding the users, no user with id 1 was made?
+
+INSERT INTO items (owner_id, categories_id, name) VALUES
+  (2, 1, 'Inception'),
+  (2, 1, 'The Shawshank Redemption'),
+  (2, 1, 'Pulp Fiction'),
+  (2, 2, 'Pizza'),
+  (2, 2, 'Sushi'),
+  (2, 2, 'Burger'),
+  (3, 3, 'To Kill a Mockingbird'),
+  (3, 3, '1984'),
+  (3, 3, 'The Great Gatsby'),
+  (4, 4, 'Groceries'),
+  (4, 4, 'Clothes'),
+  (4, 4, 'Electronics'),
+  (5, 1, 'The Matrix'),
+  (5, 1, 'The Godfather'),
+  (5, 1, 'The Dark Knight'),
+  (6, 2, 'Sushi'),
+  (6, 2, 'Burger'),
+  (6, 2, 'Salad'),
+  (7, 3, 'Harry Potter and the Sorcerer''s Stone'),
+  (7, 3, 'The Catcher in the Rye'),
+  (7, 3, 'Moby-Dick'),
+  (8, 4, 'Books'),
+  (8, 4, 'Furniture'),
+  (8, 4, 'Appliances');
