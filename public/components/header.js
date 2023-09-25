@@ -37,7 +37,7 @@ $(() => {
   }
 
   // Clicking the logo takes the user to Categories
-  $("header").on("click", 'logo-button', function() {
+  $("header").on("click", '#logo-button', function() {
     getUserCategories()
       .then(function(json) {
         // Show categories page
