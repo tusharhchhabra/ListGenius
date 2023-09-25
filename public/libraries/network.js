@@ -1,5 +1,5 @@
 // GET / UPDATE User Profile
-const getUserDetails = function() {
+function getUserDetails() {
   console.log(getUserDetails);
   return $.ajax({
     method: "GET",
@@ -7,7 +7,7 @@ const getUserDetails = function() {
   });
 };
 
-const updateUserDetails = function(data) {
+function updateUserDetails(data) {
   return $.ajax({
     method: "POST",
     url: "/api/profile",
@@ -15,7 +15,16 @@ const updateUserDetails = function(data) {
   });
 };
 
-const
+// GET ALL CATEGORIES w/ ITEM COUNT
+function getUserCategories() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/categories"
+  });
+};
 
-// GET / UPDATE CATEGORY
-const 
+
+// GET ALL CATEGORIES / UPDATE CATGEORY
+function assignCategory() {
+  
+};
