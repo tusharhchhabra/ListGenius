@@ -5,7 +5,7 @@ const categoryQueries = require('../db/queries/categories');
 
 router.get('/', (req, res) => {
   categoryQueries
-    .getCategories()
+    .getUserCategories()
     .then((categories) => {
       res.send({ categories });
     })

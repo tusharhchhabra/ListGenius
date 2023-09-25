@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
   // create new category from user input
   const newCategory = req.body;
   newCategory.owner_id = user_id;
-  categoryQueries
+  assignCategoryQueries
     .addCategory(newCategory)
     .then((category) => {
       res.send(category);

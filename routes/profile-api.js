@@ -2,10 +2,10 @@ const express = require('express');
 const router  = express.Router();
 
 const profileQueries = require('../db/queries/profile');
-
+// Get user details
 router.get('/', (req, res) => {
   profileQueries
-    .getProfile()
+    .getUserDetails()
     .then((profile) => {
       res.send({ profile });
     })
@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// Update User Details
 router.post('/', (req, res) => {
   // set user_id to cookie id
   const user_id = req.session.user_id;
