@@ -1,10 +1,35 @@
 const db = require('../connection');
 
-const getUsers = () => {
-  return db.query('SELECT * FROM users;')
+/* Fetch all users */
+const getUsers = (userId) => {
+  const query = `SELECT * FROM users WHERE id = $1;`
+  return db.query(query,[userId])
     .then(data => {
-      return data.rows;
+      return data.rows[0];
     });
 };
 
-module.exports = { getUsers };
+const updateUser = (userId, name, email) => {
+  const query = `UPDATE users
+  SET name = $1, email_address = $2
+  WHERE id = $3;`
+  return db.query(query,[name, email, userId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
+
+
+
+
+
+
+module.exports = {
+  getUsers,
+  updateUser
+};

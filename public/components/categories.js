@@ -35,7 +35,7 @@ $(() => {
     const categoryId = $(this).data("id");
     const category = categories.find(category => category.id === categoryId);
 
-    getItemsForCategory(categoryId)
+    getItemsForCategory(userId, categoryId)
       .then(function(items) {
         window.selectedCategory = category;
         window.items.updateItems(items);
