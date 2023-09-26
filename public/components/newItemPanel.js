@@ -1,19 +1,15 @@
 $(() => {
   const $main = $('#main-content');
   window.newItemPanel = {};
-
-  function generateNewItemPanelHtml() {
-    return `
-    <div id="new-item">
+  window.$newItemPanel = $(`
+    <section id="new-item">
       <span class="content-heading">New Item</span>
       <input id="new-item-title" placeholder="Enter item">
       <div id="suggested-categories"></div>
       <button id="save-new-item-button">Done</button>
-    </div>
-    `;
-  }
+    </section>
+  `);
 
-  // Generate suggested categories html
   function generateSuggestedCategoriesHtml(categoryNames) {
     return categoryNames.map(name => `
         <button class="suggested-category-button">
@@ -23,9 +19,9 @@ $(() => {
     ).join("\n");
   }
 
-  // Add suggested categories to the New Item panel
+  // Add suggested category buttons to the New Item panel
   function addSuggestedCategoriesView(categoryNames) {
-    const $suggestedCategoriesContainer = $main.find("#suggested-categories");
+    const $suggestedCategoriesContainer = $newItemPanel.find("#suggested-categories");
     $suggestedCategoriesContainer.empty();
     const suggestedCategoriesHtml = generateSuggestedCategoriesHtml(categoryNames);
     $suggestedCategoriesContainer.append(suggestedCategoriesHtml);
