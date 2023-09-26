@@ -46,7 +46,7 @@ $(() => {
 
     addItem(item)
       .then(() => {
-        getItemsForCategory(categoryId);
+        getItemsForCategory(userId, categoryId);
       })
       .then(items => {
         window.selectedCategory = newItemPanel.selectedCategory;
