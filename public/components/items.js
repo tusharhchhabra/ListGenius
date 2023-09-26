@@ -16,7 +16,7 @@ $(() => {
       return generateItemHtml(item);
     }).join("\n");
 
-    const categoryName = !window.selectedCategory ? "" : window.selectedCategory.name;
+    const categoryName = window.selectedCategory ? window.selectedCategory.name : "";
 
     return `
     <div id="items">
