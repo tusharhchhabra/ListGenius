@@ -1,6 +1,6 @@
 $(() => {
   const $pageHeader = $('#nav-container');
-  let currentUser = null;
+  window.currentUser = null;
 
   // Generate nav bar HTML
   function generateNavHtml(user) {

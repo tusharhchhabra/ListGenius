@@ -38,7 +38,8 @@ $(() => {
     getItemsForCategory(categoryId)
       .then(function(items) {
         window.selectedCategory = category;
-        views_manager.show('items', items);
+        window.items.updateItems(items);
+        views_manager.show('items');
       })
       .catch(err => {
         console.log(err.message);

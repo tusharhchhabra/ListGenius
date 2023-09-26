@@ -39,9 +39,9 @@ $(() => {
   $main.on("click", "#save-new-item-button", function() {
     const itemTitle = $main.find("#new-item-title").val();
     const item = {
-      name: itemTitle,
+      owner_id: currentUser.id,
       categories_id: newItemPanel.selectedCategory.id || 0,
-      owner_id: user.id // Taken from the global user object
+      name: itemTitle
     };
 
     addItem(item)
@@ -50,7 +50,8 @@ $(() => {
       })
       .then(items => {
         window.selectedCategory = newItemPanel.selectedCategory;
-        views_manager.show('items', items);
+        window.items.updateItems(items);
+        views_manager.show('items');
         newItemPanel.selectedCategory = null;
       })
       .catch(err => {
