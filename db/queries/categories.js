@@ -2,8 +2,12 @@ const db = require('../connection');
 
 /* fetching the current user's categories */
 const getCategoriesForUser = (userId) => {
-  const query = `SELECT * FROM categories
-  WHERE owner_id = $1`;
+  const query = `SELECT categories.* AS category, COUNT(items.id) AS total_items
+  FROM categories
+  JOIN items
+  ON categories.id = items.categories_id
+  WHERE items.owner_id = 1
+  GROUP BY categories.id;`;
   return db.query(query,[userId])
     .then(data => {
       return data.rows;
@@ -12,24 +16,6 @@ const getCategoriesForUser = (userId) => {
       console.log(err.message);
     });
 }
-
-/* Fetch Categories and count of all items in that particular*/
-
-const getCategory = (categoryId) => {
-  const query = `SELECT categories.*, COUNT(items.id) AS total_items
-  FROM categories
-  JOIN items
-  ON categories.id = categories_id
-  WHERE categories.id = $1
-  GROUP BY categories.id;`;
-  return db.query(query,[categoryId])
-    .then(data => {
-      return data.rows[0];
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-};
 
 /* Adding a new category */
 
