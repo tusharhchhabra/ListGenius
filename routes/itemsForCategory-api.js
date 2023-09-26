@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 
-const itemsForCategoryQueries = require('../db/queries/itemsForCategory');
+const itemsForCategoryQueries = require('../db/queries/categories');
 
 router.get('/', (req, res) => {
   itemsForCategoryQueries
