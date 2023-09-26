@@ -6,7 +6,7 @@ const getCategoriesForUser = (userId) => {
   FROM categories
   JOIN items
   ON categories.id = items.categories_id
-  WHERE items.owner_id = 1
+  WHERE items.owner_id = $1
   GROUP BY categories.id;`;
   return db.query(query,[userId])
     .then(data => {
