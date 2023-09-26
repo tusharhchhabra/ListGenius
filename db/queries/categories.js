@@ -1,8 +1,10 @@
 const db = require('../connection');
 
-const getAllCategory = () => {
-  const query = `SELECT * FROM categories;`;
-  return db.query(query)
+/* fetching the current user's categories */
+const getCategoriesForUser = (userId) => {
+  const query = `SELECT * FROM categories
+  WHERE owner_id = $1`;
+  return db.query(query,[userId])
     .then(data => {
       return data.rows;
     })
@@ -66,7 +68,7 @@ const updateCategory = (categoryId, name) => {
 
 
 module.exports = {
-  getAllCategory,
+  getCategoriesForUser,
   getCategory,
   addCategory,
   deleteCategory,

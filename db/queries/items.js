@@ -34,7 +34,7 @@ const getAllItemsOfUser = (userId) => {
     });
 };
 
-const createItem = (owner_id, categoryId, name) => {
+const addItem = (owner_id, categoryId, name) => {
   const query = `INSERT INTO items(owner_id, categories_id, name, created_at)
   VALUES ($1, $2, $3) RETURNING id;`
   return db.query(query, [owner_id, categoryId, name])
@@ -72,7 +72,7 @@ const updateItem = (itemId, name) => {
 module.exports = {
   getItemsForCategory,
   getAllItemsOfUser,
-  createItem,
+  addItem,
   deleteItem,
   updateItem
 };
