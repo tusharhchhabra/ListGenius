@@ -3,7 +3,7 @@ function getUserDetails() {
   console.log(getUserDetails);
   return $.ajax({
     method: "GET",
-    url: "/api/profile"
+    url: "/api/users"
   });
 }
 
