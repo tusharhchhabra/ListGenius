@@ -4,8 +4,16 @@ const router  = express.Router();
 const itemsQueries = require('../db/queries/items');
 
 router.get('/items', (req, res) => {
+
+  if (!req.session || !req.session.user_id) {
+    window.alert('Please sign up or log in to create lists.');
+    return res.redirect('/home');
+  }
+
+  const userId = req.session.user_id;
+
   itemsQueries
-    .getItems()
+    .getItems(userId)
     .then((items) => {
       res.send({ items });
     })
@@ -17,15 +25,16 @@ router.get('/items', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // set user_id to cookie id
-  const user_id = req.session.user_id;
-  // validate cookie
-  if (!user_id) {
-    return res.send({ error: "error" });
+
+  if (!req.session || !req.session.user_id) {
+    window.alert('Please sign up or log in to create lists.');
+    return res.redirect('/home');
   }
+
+  const userId = req.session.user_id;
   // create new item from user input
   const newItem = req.body;
-  newItem.owner_id = user_id;
+  newItem.owner_id = userId;
   itemsQueries
     .addItems(newItem)
     .then((newItem) => {

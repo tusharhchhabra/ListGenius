@@ -4,8 +4,16 @@ const router  = express.Router();
 const assignCategoryQueries = require('../db/queries/assigncategory');
 
 router.get('/', (req, res) => {
+
+  if (!req.session || !req.session.user_id) {
+    window.alert('Please sign up or log in to create lists.');
+    return res.redirect('/home');
+  }
+
+  const userId = req.session.user_id;
+
   assignCategoryQueries
-    .assignCategory()
+    .assignCategory(userId)
     .then((categories) => {
       res.send({ categories });
     })
@@ -17,15 +25,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // set user_id to cookie id
-  const user_id = req.session.user_id;
-  // validate cookie
-  if (!user_id) {
-    return res.send({ error: "error" });
+
+  if (!req.session || !req.session.user_id) {
+    window.alert('Please sign up or log in to create lists.');
+    return res.redirect('/home');
   }
-  // create new category from user input
+
+  const userId = req.session.user_id;
+
   const newCategory = req.body;
-  newCategory.owner_id = user_id;
+  newCategory.owner_id = userId;
   assignCategoryQueries
     .addCategory(newCategory)
     .then((category) => {
