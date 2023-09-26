@@ -1,6 +1,6 @@
 $(() => {
   const $pageHeader = $('#nav-container');
-  let currentUser = null;
+  window.currentUser = null;
 
   // Generate nav bar HTML
   function generateNavHtml(user) {
@@ -37,7 +37,7 @@ $(() => {
   }
 
   // Clicking the logo takes the user to Categories
-  $("header").on("click", '#logo-button', function() {
+  $('#logo-button').on("click", function() {
     getUserCategories()
       .then(function(json) {
         // Show categories page
@@ -64,8 +64,8 @@ $(() => {
 
   // Get user details
   getUserDetails()
-    .then(function(json) {
-      updateHeader(json.user);
+    .then(function(user) {
+      updateHeader(user);
     });
 });
 

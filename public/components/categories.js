@@ -22,7 +22,7 @@ $(() => {
     `;
   }
 
-  // Update categories
+  // Update categories view
   function updateCategoriesView(categories) {
     $main.find("#categories").remove();
     const categoriesHtml = generateCategoriesHtml(categories);
@@ -31,14 +31,18 @@ $(() => {
   window.categories.update = updateCategoriesView;
 
   // Clicking a category takes user to items
-  $("#categories").on("click", '.category-button', function() {
+  $main.on("click", ".category-button", function() {
     const categoryId = $(this).data("id");
     const category = categories.find(category => category.id === categoryId);
 
     getItemsForCategory(userId, categoryId)
       .then(function(items) {
         window.selectedCategory = category;
-        views_manager.show('items', items);
+        window.items.updateItems(items);
+        views_manager.show('items');
+      })
+      .catch(err => {
+        console.log(err.message);
       });
   });
 });
