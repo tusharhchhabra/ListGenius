@@ -1,11 +1,17 @@
 $(() => {
   const $main = $('#main-content');
   window.items = {};
+  window.$items = $(`
+    <div id="items">
+      <span class="content-heading">${categoryName}</span>
+      <ul id="items-list"></ul>
+    </div>
+  `);
 
   function generateItemHtml(item) {
     return `
       <li>
-        <div class="item-button" data-id="${item.id}">
+        <div class="item" data-id="${item.id}">
           ${item.name}
         </div>
       </li>`;
