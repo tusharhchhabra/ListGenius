@@ -23,12 +23,12 @@ $(() => {
   }
 
   // Update categories
-  function updateCategories(categories) {
+  function updateCategoriesView(categories) {
     $main.find("#categories").remove();
     const categoriesHtml = generateCategoriesHtml(categories);
     $main.append(categoriesHtml);
   }
-  window.categories.update = updateCategories;
+  window.categories.update = updateCategoriesView;
 
   // Clicking a category takes user to items
   $("#categories").on("click", '.category-button', function() {
@@ -37,8 +37,8 @@ $(() => {
 
     getItemsForCategory(categoryId)
       .then(function(items) {
-        views_manager.show('items', items);
         window.selectedCategory = category;
+        views_manager.show('items', items);
       });
   });
 });
