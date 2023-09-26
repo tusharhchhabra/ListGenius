@@ -1,4 +1,16 @@
 const db = require('../connection');
+
+const getAllCategory = () => {
+  const query = `SELECT * FROM categories;`;
+  return db.query(query)
+    .then(data => {
+      return data.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
 /* Fetch Categories and count of all items in that particular*/
 
 const getCategory = (categoryId) => {
@@ -42,10 +54,10 @@ const deleteCategory = (categoryId) => {
 const updateCategory = (categoryId, name) => {
   const query = `UPDATE categories
   SET name = $1
-  WHERE id = $2;`
+  WHERE id = $2 RETURNING $2;`
   return db.query(query,[name, categoryId])
     .then(data => {
-      return data.rows;
+      return data.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
@@ -54,6 +66,7 @@ const updateCategory = (categoryId, name) => {
 
 
 module.exports = {
+  getAllCategory,
   getCategory,
   addCategory,
   deleteCategory,

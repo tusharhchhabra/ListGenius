@@ -2,15 +2,15 @@ const db = require('../connection');
 
 /* Fetch Items related to a specific category */
 
-const getItem = (categoryId) => {
+const getItemsForCategory = (userId, categoryId) => {
   const query = `SELECT *
   FROM items
-  JOIN categories
-  ON categories.id = categories_id
-  WHERE categories_id = $1;`
-  return db.query(query,[categoryId])
+  JOIN users
+  ON users.id = owner_id
+  WHERE users.id = $1 and categories_id = $2`
+  return db.query(query,[userId, categoryId])
     .then(data => {
-      return data.rows[0];
+      return data.rows;
     })
     .catch((err) => {
       console.log(err.message);
@@ -36,7 +36,7 @@ const getAllItemsOfUser = (userId) => {
 
 const createItem = (owner_id, categoryId, name) => {
   const query = `INSERT INTO items(owner_id, categories_id, name, created_at)
-  VALUES ($1, $2, $3, now()) RETURNING id;`
+  VALUES ($1, $2, $3) RETURNING id;`
   return db.query(query, [owner_id, categoryId, name])
     .then(data => {
       return data.rows[0];
@@ -47,7 +47,7 @@ const createItem = (owner_id, categoryId, name) => {
 };
 
 const deleteItem = (itemId) => {
-  const query = `DELETE FROM categories WHERE id = $1;`
+  const query = `DELETE FROM items WHERE id = $1;`
   return db.query(query, [itemId])
     .catch(error => {
       throw error;
@@ -70,7 +70,7 @@ const updateItem = (itemId, name) => {
 
 
 module.exports = {
-  getItem,
+  getItemsForCategory,
   getAllItemsOfUser,
   createItem,
   deleteItem,
