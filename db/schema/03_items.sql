@@ -1,9 +1,8 @@
 DROP TABLE IF EXISTS items CASCADE;
 CREATE TABLE items (
   id SERIAL PRIMARY KEY NOT NULL,
-  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   categories_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT Now(),
-  completed_at TIMESTAMP  
+  completed_at TIMESTAMP
 );
