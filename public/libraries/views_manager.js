@@ -5,7 +5,7 @@ $(() => {
   window.views_manager = {};
 
   window.$categories = $(`<div id="categories"></div>`);
-  window.$items = `<div id="items"></div>`;
+  window.$items = $(`<div id="items"></div>`);
   window.$newItemPanel = $(`
     <section id="new-item">
       <span class="content-heading">New Item</span>
@@ -57,5 +57,4 @@ $(() => {
       }
     }
   };
-
 });

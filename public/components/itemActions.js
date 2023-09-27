@@ -12,6 +12,7 @@ $(() => {
     $(this).append($actionButtons);
   });
 
+  // Show action buttons on hover
   $main.on("mouseleave", ".item-wrapper", function() {
     $(this).find('.action-buttons').remove();
   });

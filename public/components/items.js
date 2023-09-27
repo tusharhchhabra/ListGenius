@@ -29,13 +29,9 @@ $(() => {
   // Update items view
   function updateItemsView(items) {
     $items.empty();
-    console.log($items.html());
     const itemsHtml = generateItemsHtml(items);
     $items.append(itemsHtml);
     views_manager.show("items");
   }
   window.items.updateItems = updateItemsView;
-
-  console.log("hello");
-  updateItemsView(itemsEx);
 });
