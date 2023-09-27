@@ -19,16 +19,16 @@ const getCategoriesForUser = (userId) => {
 
 /* Adding a new category */
 
-const addCategory = (categoryId, owner_id, categoryName) => {
+const addCategory = (owner_id, categoryName) => {
   const query = `INSERT INTO categories(owner_id, name, created_at)
-  VALUES ($2, $3, now()) RETURNING id;`
-  return db.query(query, [categoryId, owner_id, categoryName])
-  .then(data => {
-    return data.rows[0];
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+  VALUES ($1, $2, now()) RETURNING id;`;
+  return db.query(query, [owner_id, categoryName])
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 }
 
 const deleteCategory = (categoryId) => {
@@ -55,7 +55,6 @@ const updateCategory = (categoryId, name) => {
 
 module.exports = {
   getCategoriesForUser,
-  getCategory,
   addCategory,
   deleteCategory,
   updateCategory
