@@ -26,7 +26,7 @@ $(() => {
   // Reassign category
   $main.on("click", ".reassign-category-button", function() {
     const itemId = $(this).parent().data('id');
-    window.items.itemCurrentlyEditing = itemId;
-    views_manager.show("reassignCategory");
+    window.items.itemBeingEdited = itemId;
+    views_manager.show("assignCategory");
   });
 });
