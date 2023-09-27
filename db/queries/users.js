@@ -22,13 +22,6 @@ const updateUser = (userId, name, email) => {
     });
 };
 
-
-
-
-
-
-
-
 module.exports = {
   getUsers,
   updateUser
