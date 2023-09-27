@@ -87,5 +87,6 @@ module.exports = {
   getAllItemsOfUser,
   addItem,
   deleteItem,
-  updateItem
+  updateItemName,
+  updateItemCategory
 };
