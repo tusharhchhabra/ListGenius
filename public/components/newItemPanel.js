@@ -43,7 +43,7 @@ $(() => {
       .then(items => {
         window.items = items;
         window.selectedCategory = newItemPanel.selectedCategory;
-        window.items.updateItems(items);
+        window.items.update(items);
         views_manager.show('items');
         newItemPanel.selectedCategory = null;
       })

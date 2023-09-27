@@ -15,6 +15,7 @@ $(() => {
     </section>
   `);
   window.$assignCategoryPanel = $(`<div id="assign-category"></div>`);
+  window.$newItemButton = $(``);
   window.$profile = $(``);
   window.$home = $(``);
 
@@ -23,15 +24,18 @@ $(() => {
     $items.detach();
     $newItemPanel.detach();
     $assignCategoryPanel.detach();
+    $newItemButton.detach();
     $profile.detach();
     $home.detach();
 
     switch (item) {
       case 'categories':
         $main.append($categories);
+        window.newItemButton.add();
         break;
       case 'items':
         $main.append($items);
+        window.newItemButton.add();
         break;
       case 'newItem':
         $main.append($newItemPanel);
