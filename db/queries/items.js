@@ -66,18 +66,6 @@ const updateItemName = (itemId, name) => {
     });
 };
 
-const findNextCategoryId = () => {
-  const query = `SELECT categories_id FROM items ORDER BY categories_id DESC LIMIT 1;`;
-  return db.query(query)
-    .then(data => {
-      const highestCategoryId = data.rows[0].categories_id; // Access the 'categories_id' column
-      return parseInt(highestCategoryId) + 1; // Convert to integer and add 1
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-};
-
 const updateItemCategory = (itemId, categoryId) => {
   const query = `UPDATE items
   SET categories_id = $1
@@ -97,6 +85,5 @@ module.exports = {
   addItem,
   deleteItem,
   updateItemName,
-  updateItemCategory,
-  findNextCategoryId
+  updateItemCategory
 };
