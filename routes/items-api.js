@@ -92,9 +92,9 @@ router.patch('/:id', (req, res) => {
 // curl test: curl -X DELETE http://localhost:8080/api/items/5
 router.delete('/:id', (req, res) => {
 
-  // if (!req.cookies || !req.cookies.user_id) {
-  //   return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
-  // }
+  if (!req.cookies || !req.cookies.user_id) {
+    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  }
 
   const itemId = req.params.id;
 
