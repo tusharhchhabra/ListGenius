@@ -1,12 +1,12 @@
 const db = require('../connection');
 
-/* fetching the current user's categories */
+/* fetching the current user's categories w/ item count*/
 const getCategoriesForUser = (userId) => {
   const query = `SELECT categories.* AS category, COUNT(items.id) AS total_items
   FROM categories
   JOIN items
   ON categories.id = items.categories_id
-  WHERE items.owner_id = $1
+  WHERE categories.owner_id = $1
   GROUP BY categories.id;`;
   return db.query(query,[userId])
     .then(data => {
@@ -15,20 +15,35 @@ const getCategoriesForUser = (userId) => {
     .catch((err) => {
       console.log(err.message);
     });
-}
+};
+// Fetch categories w/o count
+const getCategoriesIDForUser = (userId) => {
+  const query = `SELECT categories.id AS categoryId
+  FROM categories
+  WHERE categories.owner_id = $1
+  GROUP BY categories.id;`;
+  return db.query(query,[userId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
 
 /* Adding a new category */
 
-const addCategory = (categoryId, owner_id, categoryName) => {
+const addCategory = (owner_id, categoryName) => {
   const query = `INSERT INTO categories(owner_id, name, created_at)
-  VALUES ($2, $3, now()) RETURNING id;`
-  return db.query(query, [categoryId, owner_id, categoryName])
-  .then(data => {
-    return data.rows[0];
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+  VALUES ($1, $2, now()) RETURNING *;`;
+  return db.query(query, [owner_id, categoryName])
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 }
 
 const deleteCategory = (categoryId) => {
@@ -55,8 +70,8 @@ const updateCategory = (categoryId, name) => {
 
 module.exports = {
   getCategoriesForUser,
-  getCategory,
   addCategory,
   deleteCategory,
-  updateCategory
+  updateCategory,
+  getCategoriesIDForUser
 };
