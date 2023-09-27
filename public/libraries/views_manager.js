@@ -14,7 +14,7 @@ $(() => {
       <button id="save-new-item-button">Done</button>
     </section>
   `);
-  window.$assignCategoryPanel = $(``);
+  window.$assignCategoryPanel = $(`<div id="assign-category"></div>`);
   window.$profile = $(``);
   window.$home = $(``);
 
