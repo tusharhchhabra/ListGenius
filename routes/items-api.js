@@ -23,44 +23,42 @@ router.get('/', (req, res) => {
     });
 });
 
-
+// Add Item
 // curl test for item with existing category: curl -X POST -H "Content-Type: application/json" -d '{"categoryId": "1", "category": "Movies", "userInput": "Saw"}' http://localhost:8080/api/items/1
-
 
 // curl test for item with no existing category: curl -X POST -H "Content-Type: application/json" -d '{"categoryId": "5", "category": "Travel", "userInput": "Japan"}' http://localhost:8080/api/items/1
 
 router.post('/:id', async(req, res) => {
 
-  // const userId = req.cookies.user_id;
+  const userId = req.cookies.user_id;
 
-  // if (!req.cookies || !req.cookies.user_id) {
-  //   return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
-  // }
+  if (!req.cookies || !req.cookies.user_id) {
+    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  }
 
-  const userId = 1;
-  const userInputCategoryId = parseInt(req.body.categoryId); // Convert to integer
+  const userInputCategoryId = parseInt(req.body.categoryId);
 
   getCategoriesIDForUser(userId)
     .then((ids) => {
       console.log("ids:", ids);
-      const categoryIdsArray = ids.map(catObj => catObj.categoryid); // Extract just the IDs
+      // Extract the IDs
+      const categoryIdsArray = ids.map(catObj => catObj.categoryid);
 
       if (categoryIdsArray.includes(userInputCategoryId)) {
-        console.log("Category exists, adding item...");
         return itemsQueries.addItem(userInputCategoryId, req.body.userInput);
       } else {
-        console.log("Category does not exist, creating category...");
         return addCategory(userId, req.body.category)
           .then((result) => {
-            const newCategoryId = result.id;  // Extracting the actual ID
-            console.log("Created new category with ID:", newCategoryId);
-            console.log("Adding item to the new category...");
+            res.send(result);
+            const newCategoryId = result.id;
             return itemsQueries.addItem(newCategoryId, req.body.userInput);
+          })
+          .then((newItem) => {
+            res.send(newItem);
           });
       }
     })
-    .then((newItem) => {
-      res.send(newItem);
+    .then(() => {
     })
     .catch((err) => {
       console.error("Error while processing:", err);
@@ -68,25 +66,17 @@ router.post('/:id', async(req, res) => {
     });
 });
 
-
 // Update Item
-// cur test: curl -X PATCH -H "Content-Type: application/json" -d '{"name": "Updated Item Name"}' http://localhost:8080/api/items/5
-
+// curl test: curl -X PATCH -H "Content-Type: application/json" -d '{"name": "Updated Item Name"}' http://localhost:8080/api/items/5
 
 router.patch('/:id', (req, res) => {
 
-  // const userId = req.cookies.user_id;
-
-  // if (!req.cookies || !req.cookies.user_id) {
-  //   return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
-  // }
-
-  // const userId = 1;
+  if (!req.cookies || !req.cookies.user_id) {
+    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  }
 
   const itemName = req.body.name;
-  // const owner_id = userId;
   const itemId = req.params.id;
-
 
   itemsQueries
     .updateItem(itemId, itemName)
@@ -100,17 +90,12 @@ router.patch('/:id', (req, res) => {
 
 // Delete Item
 // curl test: curl -X DELETE http://localhost:8080/api/items/5
-
 router.delete('/:id', (req, res) => {
 
-  // const userId = req.cookies.user_id;
+  if (!req.cookies || !req.cookies.user_id) {
+    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  }
 
-  // if (!req.cookies || !req.cookies.user_id) {
-  //   return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
-  // }
-
-  // const categoryName = req.body.name;
-  // const owner_id = userId;
   const itemId = req.params.id;
 
   itemsQueries

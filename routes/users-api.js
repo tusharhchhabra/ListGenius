@@ -7,18 +7,16 @@
 
 const express = require('express');
 const router  = express.Router();
+const userQueries = require('../db/queries/users.js');
 
 // I dont think we even need this route.
-const userQueries = require('../db/queries/users.js');
-// Get user details
 router.get('/', (req, res) => {
 
-  const userId = 1;
-  // const userId = req.cookies.user_id;
+  const userId = req.cookies.user_id;
 
-  // if (!req.cookies || !req.cookies.user_id) {
-  //   return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
-  // }
+  if (!req.cookies || !req.cookies.user_id) {
+    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  }
 
   userQueries
     .getUsers(userId)
@@ -33,22 +31,18 @@ router.get('/', (req, res) => {
 });
 
 // Update User Details
-
 // curl test: curl -X PATCH -H "Content-Type: application/json" -d '{"name": "NewUserName", "email": "newemail@example.com"}' http://localhost:8080/api/users/5
 
 router.patch('/:id', (req, res) => {
 
-  // const userId = req.cookies.user_id;
+  const userId = req.cookies.user_id;
 
-  // if (!req.cookies || !req.cookies.user_id) {
-  //   return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
-  // }
-
-  const userId = 1;
+  if (!req.cookies || !req.cookies.user_id) {
+    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  }
 
   const userName = req.body.name;
   const userEmail = req.body.email;
-
 
   userQueries
     .updateUser(userId, userName, userEmail)

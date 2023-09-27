@@ -36,7 +36,7 @@ const getCategoriesIDForUser = (userId) => {
 
 const addCategory = (owner_id, categoryName) => {
   const query = `INSERT INTO categories(owner_id, name, created_at)
-  VALUES ($1, $2, now()) RETURNING id;`;
+  VALUES ($1, $2, now()) RETURNING *;`;
   return db.query(query, [owner_id, categoryName])
     .then(data => {
       return data.rows[0];

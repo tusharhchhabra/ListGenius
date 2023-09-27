@@ -38,7 +38,7 @@ const addItem = (categoryId, name) => {
   VALUES ($1, $2, Now()) RETURNING id;`;
   return db.query(query, [categoryId, name])
     .then(data => {
-      return data.rows[0];
+      return data.rows;
     })
     .catch(error => {
       throw error;
@@ -46,7 +46,7 @@ const addItem = (categoryId, name) => {
 };
 
 const deleteItem = (itemId) => {
-  const query = `DELETE FROM items WHERE id = $1;`
+  const query = `DELETE FROM items WHERE id = $1;`;
   return db.query(query, [itemId])
     .catch(error => {
       throw error;
