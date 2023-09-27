@@ -8,18 +8,20 @@
 const express = require('express');
 const router  = express.Router();
 
-const profileQueries = require('../db/queries/users.js');
+
+// I dont think we even need this route.
+const userQueries = require('../db/queries/users.js');
 // Get user details
 router.get('/', (req, res) => {
 
-  if (!req.session || !req.session.user_id) {
-    window.alert('Please sign up or log in to view your profile.');
-    return res.redirect('/home');
-  }
+  const userId = 1;
+  // const userId = req.cookies.user_id;
 
-  const userId = req.session.user_id;
+  // if (!req.cookies || !req.cookies.user_id) {
+  //   return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  // }
 
-  profileQueries
+  userQueries
     .getUsers(userId)
     .then((user) => {
       res.send({ user });
@@ -32,20 +34,22 @@ router.get('/', (req, res) => {
 });
 
 // Update User Details
-router.post('/', (req, res) => {
+router.patch('/:id', (req, res) => {
 
-  if (!req.session || !req.session.user_id) {
-    window.alert('Please sign up or log in to create lists.');
-    return res.redirect('/home');
-  }
+  // const userId = req.cookies.user_id;
 
-  const userId = req.session.user_id;
+  // if (!req.cookies || !req.cookies.user_id) {
+  //   return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  // }
 
-  // Edit profile from user input
-  const updateUser = req.body;
-  updateUser.id = userId;
-  profileQueries
-    .updateUser(updateUser)
+  const userId = 1;
+
+  const userName = req.body.name;
+  const userEmail = req.body.email;
+
+
+  userQueries
+    .updateUser(userId, userName, userEmail)
     .then((user) => {
       res.send(user);
     })
