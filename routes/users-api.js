@@ -33,6 +33,9 @@ router.get('/', (req, res) => {
 });
 
 // Update User Details
+
+// curl test: curl -X PATCH -H "Content-Type: application/json" -d '{"name": "NewUserName", "email": "newemail@example.com"}' http://localhost:8080/api/users/5
+
 router.patch('/:id', (req, res) => {
 
   // const userId = req.cookies.user_id;
