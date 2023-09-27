@@ -4,6 +4,7 @@ require('dotenv').config();
 // Web server config
 const sassMiddleware = require('./lib/sass-middleware');
 const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser')
 const express = require('express');
 const morgan = require('morgan');
 
@@ -16,6 +17,7 @@ const app = express();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(
   '/styles',
   sassMiddleware({
@@ -29,31 +31,28 @@ app.use(cookieSession({
   name: 'session',
   keys: ['key']
 }));
+app.use(cookieParser());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-// const homeApiRoute = require('/routes/home');
-// const authenticate = require("./routes/authenticate");
-// const userApiRoutes = require('./routes/users-api');
+const homeApiRoute = require('./routes/home');
+const authenticate = require("./routes/authenticate");
+const userApiRoutes = require('./routes/users-api');
 const categoriesApiRoutes = require('./routes/categories-api');
-// const itemsApiRoutes = require('./routes/new-item-api');
-// const itemsForCategoryApiRoutes = require("./routes/itemsForCategory-api");
-// const updateCategoryApiRoutes = require('./routes/update-category-api');
-// const profileAPIRoutes = require('./routes/profile-api');
+const itemsApiRoutes = require('./routes/items-api');
+const updateCategoryApiRoutes = require('./routes/update-category-api');
 
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
-// app.use('/home', homeApiRoute);
-// app.use('/api/users', userApiRoutes);
-// app.use('/login/:id', authenticate);
-// app.use('/api/users', userApiRoutes);
+app.use('/home', homeApiRoute);
+app.use('/api/users', userApiRoutes);
+app.use('/login', authenticate);
 app.use('/api/categories', categoriesApiRoutes);
-// app.use('/api/items', itemsApiRoutes);
-// app.use('/api/itemsforcategory', itemsForCategoryApiRoutes);
-// app.use('/api/updatecategory', updateCategoryApiRoutes);
-// app.use('/api/profile', profileAPIRoutes);
+app.use('/api/categories/:id', categoriesApiRoutes);
+app.use('/api/items', itemsApiRoutes);
+app.use('/api/updatecategory', updateCategoryApiRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
