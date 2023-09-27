@@ -25,10 +25,8 @@ $(() => {
   // Update categories view
   function updateCategoriesView(categories) {
     $categories.empty();
-    console.log($categories.outerHtml);
     const categoriesHtml = generateCategoriesHtml(categories);
     $categories.append(categoriesHtml);
-    console.log($categories.html());
   }
   window.categories.update = updateCategoriesView;
 
@@ -48,7 +46,4 @@ $(() => {
         console.log(err.message);
       });
   });
-
-  window.categories.update(categoriesEx);
-  views_manager.show("categories");
 });
