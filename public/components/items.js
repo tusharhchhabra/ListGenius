@@ -5,8 +5,8 @@ $(() => {
   function generateItemHtml(item) {
     return `
       <li>
-        <div class="item-button" data-id="${item.id}">
-          ${item.name}
+        <div class="item-wrapper" data-id="${item.id}">
+          <span>${item.name}</span>
         </div>
       </li>`;
   }
@@ -19,20 +19,19 @@ $(() => {
     const categoryName = window.selectedCategory ? window.selectedCategory.name : "";
 
     return `
-    <div id="items">
       <span class="content-heading">${categoryName}</span>
-      <ul>
+      <ul id="items-list">
         ${itemsListHtml}
       </ul>
-    </div>
     `;
   }
 
   // Update items view
   function updateItemsView(items) {
-    $main.find("#items").remove();
+    $items.empty();
     const itemsHtml = generateItemsHtml(items);
-    $main.append(itemsHtml);
+    $items.append(itemsHtml);
+    views_manager.show("items");
   }
   window.items.updateItems = updateItemsView;
 });

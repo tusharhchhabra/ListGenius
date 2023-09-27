@@ -1,14 +1,6 @@
 $(() => {
   const $main = $('#main-content');
   window.newItemPanel = {};
-  window.$newItemPanel = $(`
-    <section id="new-item">
-      <span class="content-heading">New Item</span>
-      <input id="new-item-title" placeholder="Enter item">
-      <div id="suggested-categories"></div>
-      <button id="save-new-item-button">Done</button>
-    </section>
-  `);
 
   function generateSuggestedCategoriesHtml(categoryNames) {
     return categoryNames.map(name => `
@@ -49,6 +41,7 @@ $(() => {
         getItemsForCategory(userId, categoryId);
       })
       .then(items => {
+        window.items = items;
         window.selectedCategory = newItemPanel.selectedCategory;
         window.items.updateItems(items);
         views_manager.show('items');

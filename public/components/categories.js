@@ -13,20 +13,18 @@ $(() => {
     }).join("\n");
 
     return `
-    <div id="categories">
       <span class="content-heading">Categories</span>
       <ul>
         ${categoriesListHtml}
       </ul>
-    </div>
     `;
   }
 
   // Update categories view
   function updateCategoriesView(categories) {
-    $main.find("#categories").remove();
+    $categories.empty();
     const categoriesHtml = generateCategoriesHtml(categories);
-    $main.append(categoriesHtml);
+    $categories.append(categoriesHtml);
   }
   window.categories.update = updateCategoriesView;
 
@@ -37,6 +35,7 @@ $(() => {
 
     getItemsForCategory(userId, categoryId)
       .then(function(items) {
+        window.items = items;
         window.selectedCategory = category;
         window.items.updateItems(items);
         views_manager.show('items');

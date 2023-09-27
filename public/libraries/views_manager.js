@@ -4,6 +4,20 @@ $(() => {
 
   window.views_manager = {};
 
+  window.$categories = $(`<div id="categories"></div>`);
+  window.$items = $(`<div id="items"></div>`);
+  window.$newItemPanel = $(`
+    <section id="new-item">
+      <span class="content-heading">New Item</span>
+      <input id="new-item-title" placeholder="Enter item">
+      <div id="suggested-categories"></div>
+      <button id="save-new-item-button">Done</button>
+    </section>
+  `);
+  window.$assignCategoryPanel = $(``);
+  window.$profile = $(``);
+  window.$home = $(``);
+
   window.views_manager.show = function(item) {
     $categories.detach();
     $items.detach();
@@ -42,6 +56,5 @@ $(() => {
         break;
       }
     }
-  }
-
+  };
 });
