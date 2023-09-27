@@ -1,6 +1,6 @@
 $(() => {
-  const $pageHeader = $('#nav-container');
-  let currentUser = null;
+  const $header = $('#nav-container');
+  window.currentUser = null;
 
   // Generate nav bar HTML
   function generateNavHtml(user) {
@@ -31,13 +31,13 @@ $(() => {
   // Update header (nav bar)
   function updateHeader(user) {
     currentUser = user;
-    $pageHeader.find('nav').remove();
+    $header.find('nav').remove();
     const navHtml = generateNavHtml(user);
-    $pageHeader.append(navHtml);
+    $header.append(navHtml);
   }
 
   // Clicking the logo takes the user to Categories
-  $("header").on("click", '#logo-button', function() {
+  $('#logo-button').on("click", function() {
     getUserCategories()
       .then(function(json) {
         // Show categories page
@@ -63,9 +63,9 @@ $(() => {
   window.header.update = updateHeader;
 
   // Get user details
-  getUserDetails()
-    .then(function(json) {
-      updateHeader(json.user);
-    });
+  // getUserDetails()
+  //   .then(function(user) {
+  //     updateHeader(user);
+  //   });
 });
 
