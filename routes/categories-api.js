@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   categoryQueries
     .getCategoriesForUser(userId)
     .then((categories) => {
-      res.json({ categories });
+      res.send({ categories });
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -94,7 +94,7 @@ router.patch('/:id', (req, res) => {
 // Delete a category
 // curl test: curl -X DELETE http://localhost:8080/api/categories/5
 router.delete('/:id', (req, res) => {
-  
+
   if (!req.cookies || !req.cookies.user_id) {
     return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
   }
