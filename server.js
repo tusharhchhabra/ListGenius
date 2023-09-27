@@ -40,19 +40,16 @@ const authenticate = require("./routes/authenticate");
 const userApiRoutes = require('./routes/users-api');
 const categoriesApiRoutes = require('./routes/categories-api');
 const itemsApiRoutes = require('./routes/items-api');
-const updateCategoryApiRoutes = require('./routes/update-category-api');
-
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/home', homeApiRoute);
-app.use('/api/users', userApiRoutes);
 app.use('/login', authenticate);
+app.use('/api/users', userApiRoutes);
 app.use('/api/categories', categoriesApiRoutes);
 app.use('/api/categories/:id', categoriesApiRoutes);
 app.use('/api/items', itemsApiRoutes);
-app.use('/api/updatecategory', updateCategoryApiRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
