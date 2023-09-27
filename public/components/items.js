@@ -1,23 +1,12 @@
 $(() => {
   const $main = $('#main-content');
   window.items = {};
-  window.$items = $(`
-    <div id="items">
-      <span class="content-heading">${categoryName}</span>
-      <ul id="items-list"></ul>
-    </div>
-  `);
 
   function generateItemHtml(item) {
     return `
       <li>
-        <div class="item" data-id="${item.id}">
+        <div class="item-wrapper" data-id="${item.id}">
           <span>${item.name}</span>
-          <div id="item-options">
-            <button class="edit" data-id="${item.id}">
-            <button class="assign-category" data-id="${item.id}">
-            <button class="delete" data-id="${item.id}">
-          </div>
         </div>
       </li>`;
   }
@@ -30,20 +19,23 @@ $(() => {
     const categoryName = window.selectedCategory ? window.selectedCategory.name : "";
 
     return `
-    <div id="items">
       <span class="content-heading">${categoryName}</span>
-      <ul>
+      <ul id="items-list">
         ${itemsListHtml}
       </ul>
-    </div>
     `;
   }
 
   // Update items view
   function updateItemsView(items) {
-    $main.find("#items").remove();
+    $items.empty();
+    console.log($items.html());
     const itemsHtml = generateItemsHtml(items);
-    $main.append(itemsHtml);
+    $items.append(itemsHtml);
+    views_manager.show("items");
   }
   window.items.updateItems = updateItemsView;
+
+  console.log("hello");
+  updateItemsView(itemsEx);
 });

@@ -1,19 +1,18 @@
 $(() => {
   const $main = $('#main-content');
 
-  $main.on("mouseenter", ".item", function() {
+  $main.on("mouseenter", ".item-wrapper", function() {
     const itemId = $(this).data('id');
     const $actionButtons = $(`
       <div class="action-buttons" data-id="${itemId}">
-        <button class="edit-item">Edit</button>
         <button class="delete-item">Delete</button>
-        <button class="view-item">View</button>
+        <button class="view-item">Change Category</button>
       </div>
     `);
     $(this).append($actionButtons);
   });
 
-  $main.on("mouseleave", ".item", function() {
+  $main.on("mouseleave", ".item-wrapper", function() {
     $(this).find('.action-buttons').remove();
   });
 

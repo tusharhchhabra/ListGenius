@@ -1,5 +1,5 @@
 $(() => {
-  const $pageHeader = $('#nav-container');
+  const $header = $('#nav-container');
   window.currentUser = null;
 
   // Generate nav bar HTML
@@ -31,9 +31,9 @@ $(() => {
   // Update header (nav bar)
   function updateHeader(user) {
     currentUser = user;
-    $pageHeader.find('nav').remove();
+    $header.find('nav').remove();
     const navHtml = generateNavHtml(user);
-    $pageHeader.append(navHtml);
+    $header.append(navHtml);
   }
 
   // Clicking the logo takes the user to Categories
@@ -63,9 +63,9 @@ $(() => {
   window.header.update = updateHeader;
 
   // Get user details
-  getUserDetails()
-    .then(function(user) {
-      updateHeader(user);
-    });
+  // getUserDetails()
+  //   .then(function(user) {
+  //     updateHeader(user);
+  //   });
 });
 
