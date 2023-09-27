@@ -35,7 +35,6 @@ router.post('/:id', (req, res) => {
   const newItem = req.body;
   const newItemName = req.body.userInput;
 
-
   let categoryId;
 
   switch (req.body.category) {
@@ -85,8 +84,6 @@ router.post('/:id', (req, res) => {
   }
 });
 
-
-
 router.patch('/:id', (req, res) => {
 
   // const userId = req.cookies.user_id;
@@ -123,7 +120,6 @@ router.delete('/:id', (req, res) => {
   // const categoryName = req.body.name;
   // const owner_id = userId;
   const itemId = req.params.id;
-
 
   itemsQueries
     .deleteItem(itemId)

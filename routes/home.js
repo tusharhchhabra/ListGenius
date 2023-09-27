@@ -5,5 +5,4 @@ router.get('/', (req, res) => {
   res.redirect('/login/:id');
 });
 
-
 module.exports = router;

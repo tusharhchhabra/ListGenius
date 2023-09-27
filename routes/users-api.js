@@ -8,7 +8,6 @@
 const express = require('express');
 const router  = express.Router();
 
-
 // I dont think we even need this route.
 const userQueries = require('../db/queries/users.js');
 // Get user details
@@ -57,6 +56,5 @@ router.patch('/:id', (req, res) => {
       res.send(err.message);
     });
 });
-
 
 module.exports = router;

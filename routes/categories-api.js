@@ -4,8 +4,6 @@ const router = express.Router();
 const categoryQueries = require('../db/queries/categories');
 const itemsForCategoryQueries = require('../db/queries/items');
 
-
-
 // Get all categories from a user
 router.get('/', (req, res) => {
   const userId = req.cookies.user_id;
@@ -62,7 +60,6 @@ router.post('/', (req, res) => {
   const owner_id = userId;
   // const categoryId = ? I think this is auto added?
 
-
   categoryQueries
     .addCategory(owner_id, categoryName)
     .then((category) => {
@@ -73,6 +70,7 @@ router.post('/', (req, res) => {
     });
 });
 
+// Update a category
 router.patch('/:id', (req, res) => {
 
   const userId = req.cookies.user_id;
@@ -85,7 +83,6 @@ router.patch('/:id', (req, res) => {
   // const owner_id = userId;
   const categoryId = req.params.id;
 
-
   categoryQueries
     .updateCategory(categoryId, categoryName)
     .then((category) => {
@@ -96,6 +93,7 @@ router.patch('/:id', (req, res) => {
     });
 });
 
+// Delete a category
 router.delete('/:id', (req, res) => {
 
   // const userId = req.cookies.user_id;
@@ -108,7 +106,6 @@ router.delete('/:id', (req, res) => {
   // const owner_id = userId;
   const categoryId = req.params.id;
 
-
   categoryQueries
     .deleteCategory(categoryId)
     .then((category) => {
@@ -119,9 +116,4 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-
-
-
-
 module.exports = router;
-
