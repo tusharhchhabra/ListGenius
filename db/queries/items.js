@@ -3,7 +3,7 @@ const db = require('../connection');
 /* Fetch Items related to a specific category */
 
 const getItemsForCategory = (categoryId) => {
-  const query = `SELECT items.name
+  const query = `SELECT items.*
   FROM items
   JOIN categories ON categories.id = items.categories_id
   WHERE categories_id = $1;`;
@@ -19,7 +19,7 @@ const getItemsForCategory = (categoryId) => {
 /* List all items from a user */
 
 const getAllItemsOfUser = (userId) => {
-  const query = `SELECT items.name
+  const query = `SELECT items.*
   FROM items
   JOIN categories ON categories.id = items.categories_id
   JOIN users ON users.id = owner_id
@@ -38,7 +38,7 @@ const addItem = (categoryId, name) => {
   VALUES ($1, $2, Now()) RETURNING id;`;
   return db.query(query, [categoryId, name])
     .then(data => {
-      return data.rows;
+      return data.rows[0];
     })
     .catch(error => {
       throw error;
