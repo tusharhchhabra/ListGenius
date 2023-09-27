@@ -12,7 +12,12 @@ $(() => {
     return `
       <li>
         <div class="item" data-id="${item.id}">
-          ${item.name}
+          <span>${item.name}</span>
+          <div id="item-options">
+            <button class="edit" data-id="${item.id}">
+            <button class="assign-category" data-id="${item.id}">
+            <button class="delete" data-id="${item.id}">
+          </div>
         </div>
       </li>`;
   }

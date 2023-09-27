@@ -37,6 +37,7 @@ $(() => {
 
     getItemsForCategory(userId, categoryId)
       .then(function(items) {
+        window.items = items;
         window.selectedCategory = category;
         window.items.updateItems(items);
         views_manager.show('items');

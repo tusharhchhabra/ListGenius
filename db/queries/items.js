@@ -54,11 +54,24 @@ const deleteItem = (itemId) => {
     });
 };
 
-const updateItem = (itemId, name) => {
+const updateItemName = (itemId, name) => {
   const query = `UPDATE items
   SET name = $1
   WHERE id = $2;`
   return db.query(query,[name, itemId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+const updateItemCategory = (itemId, categoryId) => {
+  const query = `UPDATE items
+  SET categories_id = $1
+  WHERE id = $2;`
+  return db.query(query,[categoryId, itemId])
     .then(data => {
       return data.rows;
     })
