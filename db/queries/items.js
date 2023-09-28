@@ -53,6 +53,19 @@ const deleteItem = (itemId) => {
     });
 };
 
+const updateItem = (item) => {
+  const query = `UPDATE items
+  SET name = $1, categories_id = $2
+  WHERE id = $3;`
+  return db.query(query,[item.name, parseInt(item.categories_id), parseInt(item.id)])
+    .then(data => {
+      return data.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
 const updateItemName = (itemId, name) => {
   const query = `UPDATE items
   SET name = $1
@@ -84,6 +97,7 @@ module.exports = {
   getAllItemsOfUser,
   addItem,
   deleteItem,
+  updateItem,
   updateItemName,
   updateItemCategory
 };

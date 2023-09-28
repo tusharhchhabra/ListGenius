@@ -1,7 +1,7 @@
 $(() => {
   const $main = $('#main-content');
 
-// Generate home page HTML
+  // Generate home page HTML
   function generateHomeHtml() {
     return `
     <div>
@@ -23,6 +23,6 @@ $(() => {
     window.location.href = redirectPath;
   });
 
-  $main.append(generateHomeHtml());
+  views_manager.show("home");
 });
 

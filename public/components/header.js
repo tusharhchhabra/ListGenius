@@ -1,6 +1,6 @@
 $(() => {
   const $header = $('#nav-container');
-  window.currentUser = null;
+  window.currentUser = { id: 1, name: "Tushar", email_address: "tushar@gmail.com"};
 
   // Generate nav bar HTML
   function generateNavHtml(user) {

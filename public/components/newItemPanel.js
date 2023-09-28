@@ -28,7 +28,7 @@ $(() => {
   });
 
   // Clicking the Done button saves the item
-  $main.on("click", "#save-new-item-button", function() {
+  $main.on("click", "#save-item-button", function() {
     const itemTitle = $main.find("#new-item-title").val();
     const item = {
       owner_id: currentUser.id,
@@ -43,7 +43,7 @@ $(() => {
       .then(items => {
         window.items = items;
         window.selectedCategory = newItemPanel.selectedCategory;
-        window.items.updateItems(items);
+        window.items.update(items);
         views_manager.show('items');
         newItemPanel.selectedCategory = null;
       })

@@ -12,9 +12,13 @@ $(() => {
   }
 
   function generateItemsHtml(items) {
-    const itemsListHtml = items.map(item => {
-      return generateItemHtml(item);
-    }).join("\n");
+    let itemsListHtml = ``;
+    console.log(items);
+    if (items.length > 0) {
+      itemsListHtml = items.itemObjs.map(item => {
+        return generateItemHtml(item);
+      }).join("\n");
+    }
 
     const categoryName = window.selectedCategory ? window.selectedCategory.name : "";
 
@@ -33,5 +37,6 @@ $(() => {
     $items.append(itemsHtml);
     views_manager.show("items");
   }
-  window.items.updateItems = updateItemsView;
+  window.items.update = updateItemsView;
+  console.log("Items", window.items);
 });

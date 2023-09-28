@@ -4,7 +4,7 @@ const db = require('../connection');
 const getCategoriesForUser = (userId) => {
   const query = `SELECT categories.* AS category, COUNT(items.id) AS total_items
   FROM categories
-  JOIN items
+  LEFT JOIN items
   ON categories.id = items.categories_id
   WHERE categories.owner_id = $1
   GROUP BY categories.id;`;

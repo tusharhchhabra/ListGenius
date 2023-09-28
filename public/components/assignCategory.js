@@ -35,18 +35,21 @@ $(() => {
   // Update category on click, then take user to the new category
   $main.on("click", ".assign-category-button", function() {
     const categoryId = $(this).data("id");
-    const category = categories.find(category => category.id === categoryId);
+    const category = categories.categoryObjs.find(category => category.id === categoryId);
+    const item = window.items.itemToEdit
+    item.categories_id = categoryId
 
-    updateItemCategory(itemIdBeingEdited, categoryId)
+    updateItem(item)
       .then(function() {
         return getItemsForCategory(currentUser.id, categoryId)
       })
-      .then(function(items) {
-        window.items = items;
+      .then(function(response) {
+        const items = response.items;
+        window.items.itemObjs = items;
         selectedCategory = category;
-        window.items.updateItems(items);
+        window.items.update(items);
         views_manager.show('items');
-        itemBeingEdited = null;
+        window.items.itemToEdit = null;
       })
       .catch(err => {
         console.log(err.message);
