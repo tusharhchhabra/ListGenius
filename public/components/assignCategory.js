@@ -4,9 +4,9 @@ $(() => {
   function generateCategoryHtml(category) {
     return `
       <li>
-        <button class="assign-category-button" data-id="${category.id}">
+        <div class="assign-category-div" data-id="${category.id}">
           <span>${category.name}</span>
-        </button>
+        </div>
       </li>`;
   }
 
@@ -16,7 +16,7 @@ $(() => {
     }).join("\n");
 
     return `
-      <span class="content-heading">Set Category</span>
+      <span class="setCategory-content-heading">Set Category</span>
       <ul id="categories-list">
         ${categoryListHtml}
       </ul>
@@ -30,18 +30,18 @@ $(() => {
     $assignCategoryPanel.append(categoriesHtml);
     views_manager.show("assignCategory");
   }
-  window.updateAssignCategoryView = updateAssignCategoryView
+  window.updateAssignCategoryView = updateAssignCategoryView;
 
   // Update category on click, then take user to the new category
-  $main.on("click", ".assign-category-button", function() {
+  $main.on("click", ".assign-category-div", function() {
     const categoryId = $(this).data("id");
     const category = categories.categoryObjs.find(category => category.id === categoryId);
-    const item = window.items.itemToEdit
-    item.categories_id = categoryId
+    const item = window.items.itemToEdit;
+    item.categories_id = categoryId;
 
     updateItem(item)
       .then(function() {
-        return getItemsForCategory(currentUser.id, categoryId)
+        return getItemsForCategory(currentUser.id, categoryId);
       })
       .then(function(response) {
         const items = response.items;
