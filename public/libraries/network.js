@@ -1,9 +1,8 @@
 // GET / UPDATE User Profile
-function getUser(data) {
+function login(userId) {
   return $.ajax({
     method: "GET",
-    url: "/api/users/:id",
-    data
+    url: `/login/${userId}`
   });
 }
 
@@ -16,11 +15,10 @@ function updateUser(data) {
 }
 
 // GET ALL CATEGORIES w/ ITEM COUNT
-function getCategoriesForUsers(data) {
+function getCategoriesForUser() {
   return $.ajax({
     method: "GET",
-    url: "/api/categories",
-    data
+    url: "/api/categories"
   });
 }
 
@@ -53,10 +51,10 @@ function deleteCategory(data) {
 
 // GET ITEMS FOR CATEGORY
 
-function getItemsForCategory() {
+function getItemsForCategory(id) {
   return $.ajax({
     method: "GET",
-    url: "/api/categories/:id"
+    url: `/api/categories/${id}`
   });
 }
 
@@ -76,11 +74,10 @@ function addItem(data) {
   });
 }
 
-function deleteItem(data) {
+function deleteItem(id) {
   return $.ajax({
-    method: "POST",
-    url: "/api/items/:id",
-    data
+    method: "DELETE",
+    url: `/api/items/${id}`
   });
 }
 
@@ -100,3 +97,10 @@ function updateItemCategory(data) {
   });
 }
 
+function updateItem(item) {
+  return $.ajax({
+    method: "PATCH",
+    url: `/api/items/${item.id}`,
+    data: { item }
+  });
+}

@@ -11,9 +11,12 @@ $(() => {
   }
 
   function generateItemsHtml(items) {
-    const itemsListHtml = items.map(item => {
-      return generateItemHtml(item);
-    }).join("\n");
+    let itemsListHtml = ``;
+    if (items.length > 0) {
+      itemsListHtml = items.map(item => {
+        return generateItemHtml(item);
+      }).join("\n");
+    }
 
     const categoryName = window.selectedCategory ? window.selectedCategory.name : "";
 
