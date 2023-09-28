@@ -23,6 +23,7 @@ $(() => {
     window.location.href = redirectPath;
   });
 
-  $main.append(generateHomeHtml());
+  // $main.append(generateHomeHtml());
+  view_manager.show('home');
 });
 
