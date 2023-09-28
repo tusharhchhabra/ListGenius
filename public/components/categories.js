@@ -16,10 +16,12 @@ $(() => {
     }).join("\n");
 
     return `
+    <div id="categories"></div>
       <span class="content-heading">Categories</span>
       <ul>
         ${categoriesListHtml}
       </ul>
+    <div id="categories"></div>
     `;
   }
 
@@ -40,7 +42,7 @@ $(() => {
       .then(function(items) {
         window.items = items;
         window.selectedCategory = category;
-        window.items.updateItems(items);
+        window.items.update(items);
         views_manager.show('items');
       })
       .catch(err => {
