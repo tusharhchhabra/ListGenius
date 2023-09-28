@@ -5,14 +5,14 @@ $(() => {
   // Generate nav bar HTML
   function generateProfileHtml(user) {
     return `
-    <section id="profile-section">
+    <div id="profile">
       <span class="content-heading">Profile</span>
-      <div id="profileData">
+      <div id="profile-data">
         <input id="name" placeholder="Name" value="${user.name}">
-        <input id="email" placeholder="Email Address" value="${user.email_adress}">
+        <input id="email" placeholder="Email Address" value="${user.email_address}">
       </div>
       <button class="save-profile-button">Save</button>
-    </section>`;
+    </div>`;
   }
 
   function updateProfileView(user) {
@@ -22,8 +22,11 @@ $(() => {
   }
   window.userProfile.update = updateProfileView;
 
-  $('.profileData').on('input', function() {
-    if (this.value.length > 0) {
+  $main.on("input", "#name, #email", function() {
+    const currentName = $('#name').val();
+    const currentEmail = $('#email').val();
+
+    if (currentName !== window.userProfile.name || currentEmail !== window.userProfile.email_address) {
       $('.save-profile-button').show();
     } else {
       $('.save-profile-button').hide();
@@ -33,6 +36,12 @@ $(() => {
   $main.on("click", ".save-profile-button", function() {
     const userName = $main.find('#name').val();
     const userEmail = $main.find('#email').val();
-    updateUser({ userName, userEmail });
+    updateUser({ userName, userEmail })
+      .then(user => {
+        if (user) {
+          currentUser = user;
+          window.header.update(user)
+        }
+      });
   });
 });
