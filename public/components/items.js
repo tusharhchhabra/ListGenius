@@ -12,7 +12,6 @@ $(() => {
 
   function generateItemsHtml(items) {
     let itemsListHtml = ``;
-    console.log(items);
     if (items.length > 0) {
       itemsListHtml = items.map(item => {
         return generateItemHtml(item);
