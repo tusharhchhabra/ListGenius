@@ -5,8 +5,8 @@ $(() => {
     const itemId = $(this).data('id');
     const $actionButtons = $(`
       <div class="action-buttons" data-id="${itemId}">
-        <button class="delete-item">Delete</button>
-        <button class="view-item">Change Category</button>
+        <i class="fa-solid fa-trash"></i>
+        <i class="fa-solid fa-pen"></i>
       </div>
     `);
     $(this).append($actionButtons);

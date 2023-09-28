@@ -18,7 +18,7 @@ $(() => {
     return `
     <div id="categories"></div>
       <span class="content-heading">Categories</span>
-      <ul>
+      <ul id="categories-list">
         ${categoriesListHtml}
       </ul>
     <div id="categories"></div>
