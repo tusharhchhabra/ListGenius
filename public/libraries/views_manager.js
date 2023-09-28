@@ -21,7 +21,12 @@ $(() => {
     </button>
   `);
   window.$profile = $(``);
-  window.$home = $(``);
+  window.$home = $(`<div>
+  <h1>Your magical wish list</h1>
+  <h2>Powered by AI</h2>
+  <button id="get-started-button">GET STARTED</button>
+</div>
+`);
 
   window.views_manager.show = function(item) {
     $categories.detach();

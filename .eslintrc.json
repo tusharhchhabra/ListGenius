@@ -37,7 +37,7 @@
     "keyword-spacing": "error",
     "no-trailing-spaces": ["error", { "skipBlankLines": true }],
     "semi-spacing": "error",
-    "func-style": ["error", "expression"],
+    "func-style": ["error", "declaration"],
     "space-infix-ops": "error",
     "space-in-parens": "error",
     "camelcase": "error",

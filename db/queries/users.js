@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 /* Fetch all users */
-const getUsers = (userId) => {
+const getUser = (userId) => {
   const query = `SELECT * FROM users WHERE id = $1;`
   return db.query(query,[userId])
     .then(data => {
@@ -22,14 +22,7 @@ const updateUser = (userId, name, email) => {
     });
 };
 
-
-
-
-
-
-
-
 module.exports = {
-  getUsers,
+  getUser,
   updateUser
 };
