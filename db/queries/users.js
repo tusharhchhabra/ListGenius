@@ -23,6 +23,6 @@ const updateUser = (userId, name, email) => {
 };
 
 module.exports = {
-  getUsers,
+  getUser,
   updateUser
 };
