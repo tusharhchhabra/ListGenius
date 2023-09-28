@@ -6,9 +6,12 @@ $(() => {
     const categoriesListHtml = categories.map(category => {
       return `
       <li>
-        <button class="category-button" data-id="${category.id}">
+        <div class="category-div" data-id="${category.id}">
           ${category.name}
-        </button>
+          <div class="item-count">
+            5 Items
+          </div>
+        </div>
       </li>`;
     }).join("\n");
 
@@ -45,4 +48,6 @@ $(() => {
         console.log(err.message);
       });
   });
+  updateCategoriesView(categoriesEx);
+  views_manager.show('categories');
 });
