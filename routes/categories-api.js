@@ -21,7 +21,6 @@ router.get('/', (req, res) => {
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
-
 });
 
 // Get all items for a category from a user
