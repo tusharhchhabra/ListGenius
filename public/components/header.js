@@ -1,6 +1,6 @@
 $(() => {
   const $header = $('#nav-container');
-  window.currentUser = { id: 1, name: "Tushar", email_address: "tushar@gmail.com"};
+  window.currentUser = { id: 1, name: "Tushar", email_address: "tushar@gmail.com" };
 
   // Generate nav bar HTML
   function generateNavHtml(user) {
@@ -38,22 +38,18 @@ $(() => {
 
   // Clicking the logo takes the user to Categories
   $('#logo-button').on("click", function() {
-    getUserCategories()
-      .then(function(json) {
-        // Show categories page
-      });
+    views_manager.show("categories");
   });
 
   // Login button action
   $("header").on('click', '.login-button', () => {
-    // Show login page
+    views_manager.show("categories");
   });
 
   // Logout button action
   $("header").on('click', '.logout-button', () => {
-    logOut().then(() => {
-      updateHeader(null);
-    });
+    updateHeader(null);
+    views_manager.show("home");
   });
 
 

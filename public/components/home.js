@@ -18,9 +18,21 @@ $(() => {
   This is bypassing the login/signup logic and automatically
   logging in user 1 from the DB for demo purposes
   */
-  $('#get-started-button').on("click", function() {
-    const redirectPath = '/login/1';
-    window.location.href = redirectPath;
+  $main.on("click", "#get-started-button", function() {
+    // const redirectPath = '/login/1';
+    // window.location.href = redirectPath;
+
+    login(1)
+      .then((response) => {
+        window.currentUser = response.user
+
+        getCategoriesForUser()
+          .then(response => {
+            window.categories.categoryObjs = response.categories;
+            window.categories.update(response.categories);
+            views_manager.show("categories");
+          });
+      });
   });
 
   views_manager.show("home");

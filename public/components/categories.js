@@ -2,13 +2,6 @@ $(() => {
   const $main = $('#main-content');
   window.categories = {};
 
-  getCategoriesForUsers()
-    .then(response => {
-      window.categories.categoryObjs = response.categories;
-      updateCategoriesView(response.categories);
-      views_manager.show("categories");
-    });
-
   function generateCategoriesHtml(categories) {
     const categoriesListHtml = categories.map(category => {
       return `
@@ -40,14 +33,11 @@ $(() => {
     const categoryId = $(this).data("id");
     const category = categories.categoryObjs.find(category => category.id === categoryId);
 
-    console.log(category)
-
     getItemsForCategory(categoryId)
       .then(function(response) {
         const items = response.items;
         window.items.itemObjs = items;
         window.selectedCategory = category;
-        console.log(items);
         window.items.update(items);
         views_manager.show('items');
       })

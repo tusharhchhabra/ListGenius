@@ -15,7 +15,7 @@ $(() => {
     let itemsListHtml = ``;
     console.log(items);
     if (items.length > 0) {
-      itemsListHtml = items.itemObjs.map(item => {
+      itemsListHtml = items.map(item => {
         return generateItemHtml(item);
       }).join("\n");
     }

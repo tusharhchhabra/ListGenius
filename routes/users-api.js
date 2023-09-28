@@ -19,7 +19,27 @@ router.get('/', (req, res) => {
   }
 
   userQueries
-    .getUsers(userId)
+    .getUser(userId)
+    .then((user) => {
+      res.send({ user });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+router.get('/:id', (req, res) => {
+
+  const userId = req.cookies.user_id;
+
+  if (!req.cookies || !req.cookies.user_id) {
+    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  }
+
+  userQueries
+    .getUser(userId)
     .then((user) => {
       res.send({ user });
     })

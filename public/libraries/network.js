@@ -1,9 +1,8 @@
 // GET / UPDATE User Profile
-function getUser(data) {
+function login(userId) {
   return $.ajax({
     method: "GET",
-    url: "/api/users/:id",
-    data
+    url: `/login/${userId}`
   });
 }
 
@@ -16,12 +15,10 @@ function updateUser(data) {
 }
 
 // GET ALL CATEGORIES w/ ITEM COUNT
-function getCategoriesForUsers(data) {
-
+function getCategoriesForUser() {
   return $.ajax({
     method: "GET",
-    url: "/api/categories",
-    data
+    url: "/api/categories"
   });
 }
 
