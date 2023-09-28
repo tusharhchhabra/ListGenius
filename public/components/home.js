@@ -30,6 +30,7 @@ $(() => {
           .then(response => {
             window.categories.categoryObjs = response.categories;
             window.categories.update(response.categories);
+            window.header.update(window.currentUser);
             views_manager.show("categories");
           });
       });

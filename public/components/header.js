@@ -1,67 +1,91 @@
 $(() => {
   const $header = $('#nav-container');
-  window.currentUser = { id: 1, name: "Tushar", email_address: "tushar@gmail.com" };
 
   // Generate nav bar HTML
   function generateNavHtml(user) {
     if (!user) {
       return `
         <nav>
-          <button id="logo-button">
+          <div id="logo-button">
             <img src="assets/logo.png" />
-            </button>
-            <button id="login-button">
-              <span class="login_button">Login</span>
-            </button>
+          </div>
+          <button id="login-button">
+            <span>Login</span>
+          </button>
         </nav>
       `;
     }
     return `
       <nav>
-        <img id="logo" src="assets/logo.png" />
-        <button id="user-profile-link">
-          <span>${user.name}</span>
-          <img id="profile" src="assets/profile.png" />
-          <span class="logout-button">Logout</span>
-        </button>
+          <div id="logo-button">
+          <img src="assets/logo.png" />
+        </div>
+        <section id="profile-section">
+          <button id="user-profile-link">
+            <span>${user.name}</span>
+            <img id="profile" src="assets/profile.png" />
+          </button>
+          <span id="logout-button">Logout</span>
+        </div>
       </nav>
     `;
   }
 
   // Update header (nav bar)
   function updateHeader(user) {
-    currentUser = user;
     $header.find('nav').remove();
     const navHtml = generateNavHtml(user);
     $header.append(navHtml);
   }
 
   // Clicking the logo takes the user to Categories
-  $('#logo-button').on("click", function() {
-    views_manager.show("categories");
+  $header.on("click", "#logo-button", function() {
+    if (currentUser) {
+      views_manager.show("categories");
+    } else {
+      views_manager.show("home");
+    }
   });
 
   // Login button action
-  $("header").on('click', '.login-button', () => {
+  $header.on('click', '#login-button', () => {
+    if (window.currentUser) {
+      updateHeader(window.currentUser);
+    } else {
+      login(1)
+      .then((response) => {
+        window.currentUser = response.user
+
+        getCategoriesForUser()
+          .then(response => {
+            window.categories.categoryObjs = response.categories;
+            window.categories.update(response.categories);
+            window.header.update(window.currentUser);
+            views_manager.show("categories");
+          });
+      });
+    }
     views_manager.show("categories");
   });
 
   // Logout button action
-  $("header").on('click', '.logout-button', () => {
+  $header.on('click', '#logout-button', () => {
     updateHeader(null);
     views_manager.show("home");
   });
 
+  // Login button action
+  $header.on('click', '#user-profile-link', () => {
+    console.log("helllo");
+
+    window.profile.update(currentUser);
+    views_manager.show("profile");
+  });
 
   // Upon page load
   // Store updateHeader function for global use
   window.header = {};
   window.header.update = updateHeader;
-
-  // Get user details
-  // getUserDetails()
-  //   .then(function(user) {
-  //     updateHeader(user);
-  //   });
+  updateHeader(null);
 });
 
