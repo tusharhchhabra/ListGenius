@@ -8,17 +8,19 @@ $(() => {
     <section id="profile-section">
       <span class="content-heading">Profile</span>
       <div id="profileData">
-        <input id="name" placeholder="Name">
-        <input id="email" placeholder="Email Address">
+        <input id="name" placeholder="Name" value="${user.name}">
+        <input id="email" placeholder="Email Address" value="${user.email_adress}">
       </div>
       <button class="save-profile-button">Save</button>
     </section>`;
   }
 
   function updateProfileView(user) {
+    console.log(user)
     $profile.empty();
     const profileHtml = generateProfileHtml(user);
     $profile.append(profileHtml);
+    console.log($profile.html())
   }
   window.userProfile.update = updateProfileView;
 
@@ -33,6 +35,6 @@ $(() => {
   $main.on("click", ".save-profile-button", function() {
     const userName = $main.find('#name').val();
     const userEmail = $main.find('#email').val();
-    updateUser(userName, userEmail);
+    updateUser({ userName, userEmail });
   });
 });
