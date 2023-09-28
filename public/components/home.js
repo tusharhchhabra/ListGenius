@@ -4,7 +4,7 @@ $(() => {
   // Generate home page HTML
   function generateHomeHtml() {
     return `
-    <div>
+    <div class="home">
       <h1>Your magical wish list</h1>
       <h2>Powered by AI</h2>
       <button id="get-started-button">GET STARTED</button>
