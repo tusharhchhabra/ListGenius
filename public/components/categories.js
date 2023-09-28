@@ -34,7 +34,7 @@ $(() => {
   window.categories.update = updateCategoriesView;
 
   // Clicking a category takes user to items
-  $main.on("click", ".category-button", function() {
+  $main.on("click", ".category-div", function() {
     const categoryId = $(this).data("id");
     const category = categories.find(category => category.id === categoryId);
 
