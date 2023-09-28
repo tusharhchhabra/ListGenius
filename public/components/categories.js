@@ -6,17 +6,22 @@ $(() => {
     const categoriesListHtml = categories.map(category => {
       return `
       <li>
-        <button class="category-button" data-id="${category.id}">
+        <div class="category-div" data-id="${category.id}">
           ${category.name}
-        </button>
+          <div class="item-count">
+            5 Items
+          </div>
+        </div>
       </li>`;
     }).join("\n");
 
     return `
+    <div id="categories"></div>
       <span class="content-heading">Categories</span>
       <ul id="categories-list">
         ${categoriesListHtml}
       </ul>
+    <div id="categories"></div>
     `;
   }
 
@@ -37,11 +42,13 @@ $(() => {
       .then(function(items) {
         window.items = items;
         window.selectedCategory = category;
-        window.items.updateItems(items);
+        window.items.update(items);
         views_manager.show('items');
       })
       .catch(err => {
         console.log(err.message);
       });
   });
+  updateCategoriesView(categoriesEx);
+  views_manager.show('categories');
 });

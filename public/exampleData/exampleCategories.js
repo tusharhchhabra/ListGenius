@@ -16,5 +16,31 @@ const categoriesEx = [
     owner_id: 101,
     name: 'Read',
     created_at: '2023-08-15T14:22:30Z'
+  },
+  {
+    id: 3,
+    owner_id: 101,
+    name: 'Read',
+    created_at: '2023-08-15T14:22:30Z'
+  },
+  {
+    id: 3,
+    owner_id: 101,
+    name: 'Read',
+    created_at: '2023-08-15T14:22:30Z'
+  },
+  {
+    id: 3,
+    owner_id: 101,
+    name: 'Read',
+    created_at: '2023-08-15T14:22:30Z'
+  },
+  {
+    id: 3,
+    owner_id: 101,
+    categories_id: 1,
+    name: 'Travel',
+    created_at: '2023-08-15T14:22:30Z'
   }
+
 ];
