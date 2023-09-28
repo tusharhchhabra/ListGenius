@@ -9,11 +9,8 @@ router.get("/:id", (req, res) => {
     res.cookie('user_id', 1);
   }
 
-  console.log("making query");
-
   getUser(1)
     .then(user => {
-      console.log("user gotten", user)
       res.send({ user })
     });
 });

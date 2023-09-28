@@ -16,11 +16,9 @@ $(() => {
   }
 
   function updateProfileView(user) {
-    console.log(user)
     $profile.empty();
     const profileHtml = generateProfileHtml(user);
     $profile.append(profileHtml);
-    console.log($profile.html())
   }
   window.userProfile.update = updateProfileView;
 
