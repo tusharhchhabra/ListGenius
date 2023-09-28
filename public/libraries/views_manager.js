@@ -12,15 +12,15 @@ $(() => {
     </button>
   `);
   window.$newItemPanel = $(`
-    <section id="new-item">
+    <div id="new-item">
       <span class="content-heading">New Item</span>
       <input id="new-item-title" placeholder="Enter item">
       <div id="suggested-categories"></div>
       <button id="save-item-button">Done</button>
-    </section>
+    </div>
   `);
   window.$assignCategoryPanel = $(`<div id="assign-category"></div>`);
-  window.$profile = $(`<section id="profile-section"></section>`);
+  window.$profile = $(`<div id="profile"></div>`);
   window.$home = $(`
     <div>
       <h1>Your magical wish list</h1>

@@ -5,14 +5,14 @@ $(() => {
   // Generate nav bar HTML
   function generateProfileHtml(user) {
     return `
-    <section id="profile-section">
+    <div id="profile">
       <span class="content-heading">Profile</span>
-      <div id="profileData">
+      <div id="profile-data">
         <input id="name" placeholder="Name" value="${user.name}">
         <input id="email" placeholder="Email Address" value="${user.email_adress}">
       </div>
       <button class="save-profile-button">Save</button>
-    </section>`;
+    </div>`;
   }
 
   function updateProfileView(user) {
@@ -22,7 +22,7 @@ $(() => {
   }
   window.userProfile.update = updateProfileView;
 
-  $('.profileData').on('input', function() {
+  $('.profile-data').on('input', function() {
     if (this.value.length > 0) {
       $('.save-profile-button').show();
     } else {
