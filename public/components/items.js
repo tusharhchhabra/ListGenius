@@ -1,5 +1,4 @@
 $(() => {
-  const $main = $('#main-content');
   window.items = {};
 
   function generateItemHtml(item) {
@@ -23,10 +22,12 @@ $(() => {
     const categoryName = window.selectedCategory ? window.selectedCategory.name : "";
 
     return `
+    <div id="items"></div>
       <span class="content-heading">${categoryName}</span>
       <ul id="items-list">
         ${itemsListHtml}
       </ul>
+    <div id="items"></div>
     `;
   }
 
@@ -35,8 +36,6 @@ $(() => {
     $items.empty();
     const itemsHtml = generateItemsHtml(items);
     $items.append(itemsHtml);
-    views_manager.show("items");
   }
   window.items.update = updateItemsView;
-  console.log("Items", window.items);
 });

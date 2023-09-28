@@ -16,10 +16,12 @@ $(() => {
     }).join("\n");
 
     return `
+    <div id="categories"></div>
       <span class="content-heading">Categories</span>
       <ul>
         ${categoriesListHtml}
       </ul>
+    <div id="categories"></div>
     `;
   }
 

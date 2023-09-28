@@ -11,10 +11,15 @@ $(() => {
       <span class="content-heading">New Item</span>
       <input id="new-item-title" placeholder="Enter item">
       <div id="suggested-categories"></div>
-      <button id="save-new-item-button">Done</button>
+      <button id="save-item-button">Done</button>
     </section>
   `);
   window.$assignCategoryPanel = $(`<div id="assign-category"></div>`);
+  window.$newItemButton = $(`
+    <button id="new-item-button">
+      New Item
+    </button>
+  `);
   window.$profile = $(``);
   window.$home = $(`
     <div>
@@ -29,15 +34,18 @@ $(() => {
     $items.detach();
     $newItemPanel.detach();
     $assignCategoryPanel.detach();
+    $newItemButton.detach();
     $profile.detach();
     $home.detach();
 
     switch (item) {
       case 'categories':
         $main.append($categories);
+        $main.append($newItemButton);
         break;
       case 'items':
         $main.append($items);
+        $main.append($newItemButton);
         break;
       case 'newItem':
         $main.append($newItemPanel);
