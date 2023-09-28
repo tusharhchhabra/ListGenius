@@ -24,9 +24,11 @@ router.get('/', (req, res) => {
 });
 
 // Add Item
-// curl test for item with existing category: curl -X POST -H "Content-Type: application/json" -d '{"categoryId": "1", "category": "Movies", "userInput": "Saw"}' http://localhost:8080/api/items/1
+// curl test for item with no existing category: curl -X POST -H "Content-Type: application/json" -d '{"category":"Games", "userInput": "Catan"}' http://localhost:8080/api/items/
 
-// curl test for item with no existing category: curl -X POST -H "Content-Type: application/json" -d '{"categoryId": "5", "category": "Travel", "userInput": "Japan"}' http://localhost:8080/api/items/1
+// curl test for item with existing category: curl -X POST -H "Content-Type: application/json" -d '{"categoryId": "1", "userInput": "Saw"}' http://localhost:8080/api/items/
+
+// curl -X POST -H "Content-Type: application/json" -d '{"categoryId": "5", "userInput": "Monopoly"}' http://localhost:8080/api/items/
 
 router.post('/', async(req, res) => {
 
@@ -49,16 +51,18 @@ router.post('/', async(req, res) => {
       } else {
         return addCategory(userId, req.body.category)
           .then((result) => {
-            res.send(result);
+            // res.send(result);
             const newCategoryId = result.id;
             return itemsQueries.addItem(newCategoryId, req.body.userInput);
           })
           .then((newItem) => {
-            res.send(newItem);
+            // return res.send(newItem);
           });
       }
     })
-    .then(() => {
+    .then((result) => {
+      console.log("Result", result);
+      return res.send("Success!");
     })
     .catch((err) => {
       console.error("Error while processing:", err);
