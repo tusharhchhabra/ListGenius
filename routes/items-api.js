@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 
 // curl test for item with no existing category: curl -X POST -H "Content-Type: application/json" -d '{"categoryId": "5", "category": "Travel", "userInput": "Japan"}' http://localhost:8080/api/items/1
 
-router.post('/:id', async(req, res) => {
+router.post('/', async(req, res) => {
 
   const userId = req.cookies.user_id;
 
@@ -79,7 +79,26 @@ router.patch('/:id', (req, res) => {
   const itemId = req.params.id;
 
   itemsQueries
-    .updateItem(itemId, itemName)
+    .updateItemName(itemId, itemName)
+    .then((item) => {
+      res.send(item);
+    })
+    .catch((err) => {
+      res.send(err.message);
+    });
+});
+
+router.patch('/:id', (req, res) => {
+
+  if (!req.cookies || !req.cookies.user_id) {
+    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
+  }
+
+  const itemCategory = req.body.category;
+  const itemId = req.params.id;
+
+  itemsQueries
+    .updateItemCategory(itemId, itemCategory)
     .then((item) => {
       res.send(item);
     })
