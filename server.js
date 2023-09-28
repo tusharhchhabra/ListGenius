@@ -20,14 +20,14 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(
-  '/styles',
-  sassMiddleware({
-    source: __dirname + '/styles',
-    destination: __dirname + '/public/styles',
-    isSass: false, // false => scss, true => sass
-  })
-);
+// app.use(
+//   '/styles',
+//   sassMiddleware({
+//     source: __dirname + '/styles',
+//     destination: __dirname + '/public/styles',
+//     isSass: false, // false => scss, true => sass
+//   })
+// );
 app.use(express.static('public'));
 app.use(cookieSession({
   name: 'session',
