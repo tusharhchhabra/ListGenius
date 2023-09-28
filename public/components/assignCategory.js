@@ -41,13 +41,12 @@ $(() => {
 
     updateItem(item)
       .then(function() {
-        return getItemsForCategory(currentUser.id, categoryId);
+        return getItemsForCategory(categoryId);
       })
       .then(function(response) {
-        const items = response.items;
-        window.items.itemObjs = items;
-        selectedCategory = category;
-        window.items.update(items);
+        window.items.itemObjs = response.items;
+        window.selectedCategory = category;
+        window.items.update(response.items);
         views_manager.show('items');
         window.items.itemToEdit = null;
       })
