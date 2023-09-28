@@ -36,11 +36,12 @@ $(() => {
   // Clicking a category takes user to items
   $main.on("click", ".category-div", function() {
     const categoryId = $(this).data("id");
-    const category = categories.find(category => category.id === categoryId);
+    const category = categories.categoryObjs.find(category => category.id === categoryId);
 
-    getItemsForCategory(userId, categoryId)
-      .then(function(items) {
-        window.items = items;
+    getItemsForCategory(categoryId)
+      .then(function(response) {
+        const items = response.items;
+        window.items.itemObjs = items;
         window.selectedCategory = category;
         window.items.update(items);
         views_manager.show('items');
@@ -49,6 +50,4 @@ $(() => {
         console.log(err.message);
       });
   });
-  updateCategoriesView(categoriesEx);
-  views_manager.show('categories');
 });

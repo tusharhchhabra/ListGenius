@@ -1,7 +1,7 @@
 $(() => {
   const $main = $('#main-content');
 
-// Generate home page HTML
+  // Generate home page HTML
   function generateHomeHtml() {
     return `
     <div>
@@ -18,12 +18,24 @@ $(() => {
   This is bypassing the login/signup logic and automatically
   logging in user 1 from the DB for demo purposes
   */
-  $('#get-started-button').on("click", function() {
-    const redirectPath = '/login/1';
-    window.location.href = redirectPath;
+  $main.on("click", "#get-started-button", function() {
+    // const redirectPath = '/login/1';
+    // window.location.href = redirectPath;
+
+    login(1)
+      .then((response) => {
+        window.currentUser = response.user
+
+        getCategoriesForUser()
+          .then(response => {
+            window.categories.categoryObjs = response.categories;
+            window.categories.update(response.categories);
+            window.header.update(window.currentUser);
+            views_manager.show("categories");
+          });
+      });
   });
 
-  // $main.append(generateHomeHtml());
-  view_manager.show('home');
+  views_manager.show("home");
 });
 

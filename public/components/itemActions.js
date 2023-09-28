@@ -5,8 +5,8 @@ $(() => {
     const itemId = $(this).data('id');
     const $actionButtons = $(`
       <div class="action-buttons" data-id="${itemId}">
-        <i class="fa-solid fa-trash"></i>
-        <i class="fa-solid fa-pen"></i>
+        <i class="delete-item-button fa-solid fa-trash"></i>
+        <i class="reassign-category-button fa-solid fa-pen"></i>
       </div>
     `);
     $(this).append($actionButtons);
@@ -20,14 +20,22 @@ $(() => {
   // Delete
   $main.on("click", ".delete-item-button", function() {
     const itemId = $(this).parent().data('id');
-    deleteItem(itemId);
+    deleteItem(itemId)
+      .then(() => {
+        return getItemsForCategory(window.selectedCategory.id)
+      })
+      .then(items => {
+        window.items.itemObjs = items;
+        window.items.update(items);
+      });
   });
 
   // Reassign category
   $main.on("click", ".reassign-category-button", function() {
     const itemId = $(this).parent().data('id');
-    window.updateAssignCategoryView(window.categories);
-    window.items.itemIdBeingEdited = itemId;
+    window.updateAssignCategoryView(window.categories.categoryObjs);
+    const item = window.items.itemObjs.find(item => item.id === itemId);
+    window.items.itemToEdit = item;
     views_manager.show("assignCategory");
   });
 });

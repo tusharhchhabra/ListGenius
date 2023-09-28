@@ -1,5 +1,5 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 const itemsQueries = require('../db/queries/items');
 const { addCategory, getCategoriesIDForUser } = require('../db/queries/categories');
@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 
 // curl -X POST -H "Content-Type: application/json" -d '{"categoryId": "5", "userInput": "Monopoly"}' http://localhost:8080/api/items/
 
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
 
   const userId = req.cookies.user_id;
 
@@ -79,11 +79,10 @@ router.patch('/:id', (req, res) => {
     return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
   }
 
-  const itemName = req.body.name;
-  const itemId = req.params.id;
+  const item = req.body.item;
 
   itemsQueries
-    .updateItemName(itemId, itemName)
+    .updateItem(item)
     .then((item) => {
       res.send(item);
     })
@@ -92,29 +91,10 @@ router.patch('/:id', (req, res) => {
     });
 });
 
-router.patch('/:id', (req, res) => {
-
-  if (!req.cookies || !req.cookies.user_id) {
-    return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
-  }
-
-  const itemCategory = req.body.category;
-  const itemId = req.params.id;
-
-  itemsQueries
-    .updateItemCategory(itemId, itemCategory)
-    .then((item) => {
-      res.send(item);
-    })
-    .catch((err) => {
-      res.send(err.message);
-    });
-});
 
 // Delete Item
 // curl test: curl -X DELETE http://localhost:8080/api/items/5
 router.delete('/:id', (req, res) => {
-
   if (!req.cookies || !req.cookies.user_id) {
     return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
   }
