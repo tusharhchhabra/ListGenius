@@ -49,6 +49,6 @@ $(() => {
         console.log(err.message);
       });
   });
-  updateCategoriesView(categoriesEx);
-  views_manager.show('categories');
+  // updateCategoriesView(categoriesEx);
+  // views_manager.show('categories');
 });
