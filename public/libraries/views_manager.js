@@ -20,7 +20,7 @@ $(() => {
     </section>
   `);
   window.$assignCategoryPanel = $(`<div id="assign-category"></div>`);
-  window.$profile = $(``);
+  window.$profile = $(`<section id="profile-section"></section>`);
   window.$home = $(`
     <div>
       <h1>Your magical wish list</h1>

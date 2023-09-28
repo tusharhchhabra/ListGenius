@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 // Update User Details
 // curl test: curl -X PATCH -H "Content-Type: application/json" -d '{"name": "NewUserName", "email": "newemail@example.com"}' http://localhost:8080/api/users/5
 
-router.patch('/:id', (req, res) => {
+router.patch('/', (req, res) => {
 
   const userId = req.cookies.user_id;
 
@@ -41,8 +41,8 @@ router.patch('/:id', (req, res) => {
     return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
   }
 
-  const userName = req.body.name;
-  const userEmail = req.body.email;
+  const userName = req.body.userName;
+  const userEmail = req.body.userEmail;
 
   userQueries
     .updateUser(userId, userName, userEmail)

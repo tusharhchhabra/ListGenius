@@ -8,8 +8,8 @@ function login(userId) {
 
 function updateUser(data) {
   return $.ajax({
-    method: "POST",
-    url: "/api/users/:id",
+    method: "PATCH",
+    url: "/api/users",
     data
   });
 }

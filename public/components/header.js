@@ -17,16 +17,14 @@ $(() => {
     }
     return `
       <nav>
-          <div id="logo-button">
+        <div id="logo-button">
           <img src="assets/logo.png" />
         </div>
-        <section id="profile-section">
-          <button id="user-profile-link">
-            <span>${user.name}</span>
-            <img id="profile" src="assets/profile.png" />
-          </button>
-          <span id="logout-button">Logout</span>
-        </div>
+        <section id="profile-link">
+          <span>${user.name}</span>
+          <img id="profile-icon" src="assets/profile.png" />
+        </section>
+        <span id="logout-button">Logout</span>
       </nav>
     `;
   }
@@ -75,10 +73,8 @@ $(() => {
   });
 
   // Login button action
-  $header.on('click', '#user-profile-link', () => {
-    console.log("helllo");
-
-    window.profile.update(currentUser);
+  $header.on('click', '#profile-link', () => {
+    window.userProfile.update(currentUser);
     views_manager.show("profile");
   });
 
