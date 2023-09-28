@@ -34,4 +34,6 @@ $(() => {
     views_manager.show("items");
   }
   window.items.updateItems = updateItemsView;
+  updateCategoriesView(categoriesEx);
+  views_manager.show('categories');
 });
