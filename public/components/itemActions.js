@@ -3,6 +3,7 @@ $(() => {
 
   $main.on("mouseenter", ".item-wrapper", function() {
     const itemId = $(this).data('id');
+
     const $actionButtons = $(`
       <div class="action-buttons" data-id="${itemId}">
         <i class="delete-item-button fa-solid fa-trash"></i>
@@ -20,9 +21,17 @@ $(() => {
   // Delete
   $main.on("click", ".delete-item-button", function() {
     const itemId = $(this).parent().data('id');
+    const currentCategoryId = window.items.itemObjs[0].categories_id;
+    const categories = window.categories.categoryObjs;
+    const currentCategory = categories[currentCategoryId - 1];
+    let previousCount = parseInt(currentCategory.total_items);
+    previousCount--;
+    currentCategory.total_items = previousCount + "";
+    window.categories.update(window.categories.categoryObjs);
+
     deleteItem(itemId)
       .then(() => {
-        return getItemsForCategory(window.selectedCategory.id)
+        return getItemsForCategory(window.selectedCategory.id);
       })
       .then(response => {
         window.items.itemObjs = response.items;
