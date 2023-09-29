@@ -32,22 +32,22 @@ router.get('/:term', async(req, res) => {
   try {
 
     const item = req.params.term;
-    console.log("gpt called", item)
 
     const prompt = `FOLLOW INSTRUCTIONS RELIGIOUSLY.
-        Out of the categories given below, respond with one that is very relevant to the prompt. If more than one option applies, respond with the best. If none are very relevant, respond with a new suggested category that broadly describes the prompt. If you cannot find or come up with an appropriate category, respond with ''. (Example prompt: The Office, Your Response: TV Shows).
+        Out of the categories given below, respond with one that is very relevant to the prompt. If more than one option applies, respond with the best. If none are very relevant, respond with a category not given below that broadly describes the prompt. If you cannot find or come up with an appropriate category, respond with Miscellaneous. Do not add quotation marks around the repsonse. (Example prompt: The Office, Your Response: TV Shows).
         Options to choose from:
         Movies
         Eat
         Read
         Buy
+        Travel
+        Technology
         Prompt: ${item}
         "`;
     // request to GPT for the category
     const category = await queryOpenAI(prompt);
-    console.log(category)
 
-    res.json({ category });
+    res.json({ category: removeQuotationMarks(category) });
 
   } catch (error) {
     console.error("Error:", error);
@@ -57,3 +57,29 @@ router.get('/:term', async(req, res) => {
 
 module.exports = router;
 
+function removeQuotationMarks(str) {
+  // Check if string is empty or null
+  if (!str || str.length === 0) {
+    return str;
+  }
+
+  // Check the first and last characters
+  const firstChar = str.charAt(0);
+  const lastChar = str.charAt(str.length - 1);
+
+  // Remove quotes if both first and last characters are either single or double quotes
+  if ((firstChar === '"' && lastChar === '"') || (firstChar === "'" && lastChar === "'")) {
+    return str.substring(1, str.length - 1);
+  }
+
+  // Remove a single quote if it appears at the beginning or the end but not both
+  if (firstChar === '"' || firstChar === "'") {
+    return str.substring(1);
+  }
+  if (lastChar === '"' || lastChar === "'") {
+    return str.substring(0, str.length - 1);
+  }
+
+  // If no quotes to remove, return the original string
+  return str;
+}

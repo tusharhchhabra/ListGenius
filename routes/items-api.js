@@ -42,22 +42,16 @@ router.post('/', async (req, res) => {
   const existingCategoryId = parseInt(req.body.categoryId);
   const newCategoryName = req.body.newCategoryName;
 
-  console.log(req.body);
-  let newCategory = null;
-
   if (existingCategoryId) {
     itemsQueries.addItem(existingCategoryId, itemName)
       .then((item) => {
-        console.log("add item returns", item);
         return res.send({ item });
       });
   } else {
     addCategory(userId, newCategoryName)
       .then((newCategory) => {
-        console.log("add cat result", newCategory);
         return itemsQueries.addItem(newCategory.id, itemName)
           .then((item) => {
-            console.log("add item returns", item);
             return res.send({ item, newCategory });
           });
       })

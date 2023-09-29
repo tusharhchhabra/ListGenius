@@ -30,8 +30,6 @@ $(() => {
 
   let isFetchingCategory = false;
   $main.off('input', '#new-item-title').on('input', "#new-item-title", function() {
-    console.log("hello");
-
     clearTimeout(timer);
 
     const inputValue = $(this).val();
