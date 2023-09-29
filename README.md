@@ -34,7 +34,6 @@ Discover the simplicity of list-making with List Genius, where AI meets everyday
 - dotenv 2.0.0
 - express 4.17.1
 - morgan 1.9.1
-- sass 1.35.1
 
 ## Demo
 ### New Item Auto Categorization
