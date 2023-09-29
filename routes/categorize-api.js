@@ -35,7 +35,7 @@ router.get('/:term', async(req, res) => {
     console.log("gpt called", item)
 
     const prompt = `FOLLOW INSTRUCTIONS RELIGIOUSLY.
-        Out of the categories given below, respond with one that is very relevant to the prompt. If more than one option applies, respond with the best. If none are very relevant, respond with a new suggested category that broadly describes the prompt. If you cannot find or come up with an appropriate category, respond with ''. (Example prompt: 'The Office', Your Response: 'TV Shows').
+        Out of the categories given below, respond with one that is very relevant to the prompt. If more than one option applies, respond with the best. If none are very relevant, respond with a new suggested category that broadly describes the prompt. If you cannot find or come up with an appropriate category, respond with ''. (Example prompt: The Office, Your Response: TV Shows).
         Options to choose from:
         Movies
         Eat

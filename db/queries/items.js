@@ -35,7 +35,7 @@ const getAllItemsOfUser = (userId) => {
 
 const addItem = (categoryId, name) => {
   const query = `INSERT INTO items(categories_id, name, created_at)
-  VALUES ($1, $2, Now()) RETURNING id;`;
+  VALUES ($1, $2, Now()) RETURNING *;`;
   return db.query(query, [categoryId, name])
     .then(data => {
       return data.rows[0];

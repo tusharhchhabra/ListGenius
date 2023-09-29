@@ -44,33 +44,57 @@ $(() => {
 
       categorize(inputValue)
         .then(response => {
-          addSuggestedCategoriesView([response.category])
+          addSuggestedCategoriesView([response.category]);
           isFetchingCategory = false;
-          window.newItemPanel.selectedCategoryName = categoryName;
+          window.newItemPanel.selectedCategoryName = response.category;
         })
         .catch((error) => {
           console.error('API call failed:', error);
-          isFetchingCategory = false
+          isFetchingCategory = false;
         });
     }, 1000);
   });
 
 
   // Clicking the Done button saves the item
-  $main.on("click", "#save-item-button", function() {
+  $main.off('click', '#save-item-button').on("click", "#save-item-button", function() {
     const itemTitle = $main.find("#new-item-title").val();
-    const categoryName = newItemPanel.selectedCategoryName
-    const category = window.categories.find(category => category.name === selectedCategoryName)
+    const categoryName = newItemPanel.selectedCategoryName;
+    let categoryId;
+    const existingCategory = window.categories.categoryObjs.find(category => category.name === categoryName);
 
-    addItem(itemTitle, category["id"], categoryName)
-      .then(() => {
-        getItemsForCategory(categoryId);
-      })
-      .then(items => {
-        window.items = items;
-        window.selectedCategory = newItemPanel.selectedCategory;
-        window.items.update(items);
-        views_manager.show('items');
+    if (existingCategory) {
+      categoryId = existingCategory.id;
+    } else {
+      categoryId = null;
+    }
+
+    console.log("save button clicked");
+
+    addItem(itemTitle, categoryId, categoryName)
+      .then(response => {
+        const categories = window.categories.categoryObjs;
+        if (response.newCategory) {
+          response.newCategory["total_items"] = "1"
+          categories.push(response.newCategory);
+          window.categories.update(categories);
+          window.selectedCategory = response.newCategory;
+
+          window.items.itemObjs = [response.item];
+          window.items.update(window.items.itemObjs);
+          views_manager.show("items");
+        } else {
+          getItemsForCategory(existingCategory.id)
+            .then((response) => {
+              existingCategory.total_items++;
+              window.categories.update(categories);
+              window.selectedCategory = existingCategory;
+
+              window.items.itemObjs = response.items;
+              window.items.update(response.items);
+              views_manager.show("items");
+            });
+        }
         newItemPanel.selectedCategory = null;
       })
       .catch(err => {
