@@ -12,10 +12,11 @@ const getUser = (userId) => {
 const updateUser = (userId, name, email) => {
   const query = `UPDATE users
   SET name = $1, email_address = $2
-  WHERE id = $3;`
+  WHERE id = $3
+  RETURNING name, email_address;`
   return db.query(query,[name, email, userId])
     .then(data => {
-      return data.rows;
+      return data.rows[0];
     })
     .catch((err) => {
       console.log(err.message);

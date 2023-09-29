@@ -8,8 +8,8 @@ function login(userId) {
 
 function updateUser(data) {
   return $.ajax({
-    method: "POST",
-    url: "/api/users/:id",
+    method: "PATCH",
+    url: "/api/users",
     data
   });
 }
@@ -102,5 +102,12 @@ function updateItem(item) {
     method: "PATCH",
     url: `/api/items/${item.id}`,
     data: { item }
+  });
+}
+
+function categorize(itemName) {
+  return $.ajax({
+    method: "GET",
+    url: `/api/categorize/${itemName}`
   });
 }
