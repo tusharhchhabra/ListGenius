@@ -23,8 +23,8 @@ $(() => {
         <section id="profile-section">
           <button id="user-profile-link">
             <span>${user.name}</span>
-            <img id="profile" src="assets/profile.png" />
           </button>
+          <i class="fa-solid fa-circle-user" style="color: #a94ae8; margin: 8px; margin-right: 8px;"></i>
           <span id="logout-button">Logout</span>
         </div>
       </nav>
