@@ -16,10 +16,12 @@ $(() => {
     }).join("\n");
 
     return `
+    <div id="assign-categories">
       <span class="setCategory-content-heading">Set Category</span>
       <ul id="categories-list">
         ${categoryListHtml}
       </ul>
+      </div>
     `;
   }
 
@@ -37,7 +39,7 @@ $(() => {
     const categoryId = $(this).data("id");
 
     const category = categories.categoryObjs.find(category => category.id === categoryId);
-    
+
     const item = window.items.itemToEdit;
     const previousCategoryId = item.categories_id;
 

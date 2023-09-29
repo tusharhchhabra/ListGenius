@@ -2,6 +2,9 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  position: absolute;
+  top: 18%;
+  left: 27%;
 }
 
 ul {
@@ -61,6 +64,7 @@ ul {
     0   var(--_i,200%)/var(--_i,8px) 200% border-box no-repeat,
     linear-gradient(#000 0 0) padding-box no-repeat;
   transition: .3s, -webkit-mask-position .3s .3s;
+  cursor: pointer;
 
 }
 
