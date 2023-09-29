@@ -66,11 +66,11 @@ function getItemsForCategory(id) {
 //   });
 // }
 
-function addItem(data) {
+function addItem(itemName, categoryId, newCategoryName) {
   return $.ajax({
     method: "POST",
     url: "/api/items/",
-    data
+    data: { itemName, categoryId, newCategoryName }
   });
 }
 

@@ -1,6 +1,7 @@
 $(() => {
   const $main = $('#main-content');
   window.categories = {};
+  window.categories.categoryObjs = [];
 
   function generateCategoriesHtml(categories) {
     const categoriesListHtml = categories.map(category => {

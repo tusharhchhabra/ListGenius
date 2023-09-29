@@ -5,9 +5,9 @@ $(() => {
 
   function generateSuggestedCategoriesHtml(categoryNames) {
     return categoryNames.map(name => `
-        <button class="suggested-category-button">
+        <div class="suggested-category-button" data-name="${name}">
           ${name}
-        </button>
+        </div>
       `
     ).join("\n");
   }
@@ -25,46 +25,74 @@ $(() => {
   // Clicking a category to set it as the preferred category
   $main.on("click", ".suggested-category-button", function() {
     const categoryName = $(this).data("name");
-    const category = categories.find(category => category.name === categoryName);
-    window.newItemPanel.selectedCategory = category;
   });
 
 
-  $main.on('input', "new-item-title", function() {
+  let isFetchingCategory = false;
+  $main.off('input', '#new-item-title').on('input', "#new-item-title", function() {
     clearTimeout(timer);
 
     const inputValue = $(this).val();
 
     timer = setTimeout(() => {
-      categorize(inputValue)
-        .then(suggestedCategories => {
+      if (isFetchingCategory) {
+        return;
+      }
+      isFetchingCategory = true;
 
+      categorize(inputValue)
+        .then(response => {
+          addSuggestedCategoriesView([response.category]);
+          isFetchingCategory = false;
+          window.newItemPanel.selectedCategoryName = response.category;
         })
         .catch((error) => {
           console.error('API call failed:', error);
+          isFetchingCategory = false;
         });
-    }, 500);
+    }, 1000);
   });
 
 
   // Clicking the Done button saves the item
-  $main.on("click", "#save-item-button", function() {
+  $main.off('click', '#save-item-button').on("click", "#save-item-button", function() {
     const itemTitle = $main.find("#new-item-title").val();
-    const item = {
-      owner_id: currentUser.id,
-      categories_id: newItemPanel.selectedCategory ? (newItemPanel.selectedCategory.id || 0) : 0,
-      name: itemTitle
-    };
+    const categoryName = newItemPanel.selectedCategoryName;
+    let categoryId;
+    const existingCategory = window.categories.categoryObjs.find(category => category.name === categoryName);
 
-    addItem(item)
-      .then(() => {
-        getItemsForCategory(categoryId);
-      })
-      .then(items => {
-        window.items = items;
-        window.selectedCategory = newItemPanel.selectedCategory;
-        window.items.update(items);
-        views_manager.show('items');
+    if (existingCategory) {
+      categoryId = existingCategory.id;
+    } else {
+      categoryId = null;
+    }
+
+    console.log("save button clicked");
+
+    addItem(itemTitle, categoryId, categoryName)
+      .then(response => {
+        const categories = window.categories.categoryObjs;
+        if (response.newCategory) {
+          response.newCategory["total_items"] = "1"
+          categories.push(response.newCategory);
+          window.categories.update(categories);
+          window.selectedCategory = response.newCategory;
+
+          window.items.itemObjs = [response.item];
+          window.items.update(window.items.itemObjs);
+          views_manager.show("items");
+        } else {
+          getItemsForCategory(existingCategory.id)
+            .then((response) => {
+              existingCategory.total_items++;
+              window.categories.update(categories);
+              window.selectedCategory = existingCategory;
+
+              window.items.itemObjs = response.items;
+              window.items.update(response.items);
+              views_manager.show("items");
+            });
+        }
         newItemPanel.selectedCategory = null;
       })
       .catch(err => {

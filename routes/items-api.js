@@ -38,36 +38,57 @@ router.post('/', async (req, res) => {
     return res.status(401).json({ message: 'Please sign up or log in to create lists.' });
   }
 
-  const userInputCategoryId = parseInt(req.body.categoryId);
+  const itemName = req.body.itemName;
+  const existingCategoryId = parseInt(req.body.categoryId);
+  const newCategoryName = req.body.newCategoryName;
 
-  getCategoriesIDForUser(userId)
-    .then((ids) => {
-      console.log("ids:", ids);
-      // Extract the IDs
-      const categoryIdsArray = ids.map(catObj => catObj.categoryid);
-
-      if (categoryIdsArray.includes(userInputCategoryId)) {
-        return itemsQueries.addItem(userInputCategoryId, req.body.userInput);
-      } else {
-        return addCategory(userId, req.body.category)
-          .then((result) => {
-            // res.send(result);
-            const newCategoryId = result.id;
-            return itemsQueries.addItem(newCategoryId, req.body.userInput);
-          })
-          .then((newItem) => {
-            // return res.send(newItem);
+  if (existingCategoryId) {
+    itemsQueries.addItem(existingCategoryId, itemName)
+      .then((item) => {
+        return res.send({ item });
+      });
+  } else {
+    addCategory(userId, newCategoryName)
+      .then((newCategory) => {
+        return itemsQueries.addItem(newCategory.id, itemName)
+          .then((item) => {
+            return res.send({ item, newCategory });
           });
-      }
-    })
-    .then((result) => {
-      console.log("Result", result);
-      return res.send("Success!");
-    })
-    .catch((err) => {
-      console.error("Error while processing:", err);
-      res.status(500).json({ error: err.message });
-    });
+      })
+      .catch((err) => {
+        console.error("Error while creating category:", err);
+        res.status(500).json({ error: err.message });
+      });
+  }
+
+  // getCategoriesIDForUser(userId)
+  //   .then((ids) => {
+  //     const categoryIdsArray = ids.map(catObj => catObj.categoryid);
+  //     console.log("returned cats", categoryIdsArray);
+
+  //     if (categoryIdsArray.includes(userInputCategoryId)) {
+  //       return itemsQueries.addItem(userInputCategoryId, req.body.userInput);
+  //     } else {
+  //       return addCategory(userId, req.body.category)
+  //         .then((result) => {
+  //           // res.send(result);
+  //           console.log("add cat result", result);
+  //           const newCategoryId = result.id;
+  //           return itemsQueries.addItem(newCategoryId, req.body.userInput);
+  //         })
+  //         .then((newItem) => {
+  //           // return res.send(newItem);
+  //         });
+  //     }
+  //   })
+  //   .then((result) => {
+  //     console.log("Result", result);
+  //     return res.send("Success!");
+  //   })
+  //   .catch((err) => {
+  //     console.error("Error while processing:", err);
+  //     res.status(500).json({ error: err.message });
+  //   });
 });
 
 // Update Item
