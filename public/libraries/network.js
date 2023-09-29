@@ -104,3 +104,10 @@ function updateItem(item) {
     data: { item }
   });
 }
+
+function categorize(itemName) {
+  return $.ajax({
+    method: "GET",
+    url: `/api/categorize/${itemName}`
+  });
+}

@@ -7,16 +7,16 @@ $(() => {
   window.$categories = $(`<div id="categories"></div>`);
   window.$items = $(`<div id="items"></div>`);
   window.$newItemButton = $(`
-    <button id="new-item-button">
+    <div id="new-item-button">
       New Item
-    </button>
+    </div>
   `);
   window.$newItemPanel = $(`
     <div id="new-item">
       <span class="content-heading">New Item</span>
       <input id="new-item-title" placeholder="Enter item">
       <div id="suggested-categories"></div>
-      <button id="save-item-button">Done</button>
+      <div id="save-item-button">Done</div>
     </div>
   `);
   window.$assignCategoryPanel = $(`<div id="assign-category"></div>`);
