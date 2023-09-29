@@ -24,9 +24,9 @@ $(() => {
       .then(() => {
         return getItemsForCategory(window.selectedCategory.id)
       })
-      .then(items => {
-        window.items.itemObjs = items;
-        window.items.update(items);
+      .then(response => {
+        window.items.itemObjs = response.items;
+        window.items.update(response.items);
       });
   });
 

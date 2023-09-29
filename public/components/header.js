@@ -17,7 +17,7 @@ $(() => {
     }
     return `
       <nav>
-          <div id="logo-button">
+        <div id="logo-button">
           <img src="assets/logo.png" />
         </div>
         <section id="profile-section">
@@ -75,10 +75,8 @@ $(() => {
   });
 
   // Login button action
-  $header.on('click', '#user-profile-link', () => {
-    console.log("helllo");
-
-    window.profile.update(currentUser);
+  $header.on('click', '#profile-link', () => {
+    window.userProfile.update(currentUser);
     views_manager.show("profile");
   });
 

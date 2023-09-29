@@ -22,7 +22,7 @@ $(() => {
 
     return `
     <div id="items"></div>
-      <span class="content-heading">${categoryName}</span>
+      <span class="items-content-heading">${categoryName}</span>
       <ul id="items-list">
         ${itemsListHtml}
       </ul>

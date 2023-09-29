@@ -1,7 +1,9 @@
 $(() => {
+  const $main = $('#main-content');
+
   // Clicking takes the user to New Item Panel
-  $('#new-item-button').on("click", function() {
-    views_manager.show("newItemPanel");
+  $main.on("click", "#new-item-button", function() {
+    views_manager.show("newItem");
   });
 });
 
