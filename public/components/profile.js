@@ -6,7 +6,7 @@ $(() => {
   function generateProfileHtml(user) {
     return `
     <div id="profile">
-      <span class="content-heading">Profile</span>
+      <span class="profile-content-heading">Profile</span>
       <div id="profile-data">
         <input id="name" placeholder="Name" value="${user.name}">
         <input id="email" placeholder="Email Address" value="${user.email_address}">

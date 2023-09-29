@@ -13,7 +13,7 @@ $(() => {
   `);
   window.$newItemPanel = $(`
     <div id="new-item">
-      <span class="content-heading">New Item</span>
+      <span class="new-item-content-heading">New Item</span>
       <input id="new-item-title" placeholder="Enter item">
       <div id="suggested-categories"></div>
       <div id="save-item-button">Done</div>
