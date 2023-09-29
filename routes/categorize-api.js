@@ -19,7 +19,6 @@ async function queryOpenAI(promptContent) {
       'Content-Type': 'application/json'
     }
   });
-  console.log("Prompt 1:", promptContent);
 
   // Ensure you extract the response correctly from the chat model
   const message = response.data.choices[0].message;
@@ -29,12 +28,14 @@ async function queryOpenAI(promptContent) {
   return '';
 }
 
-router.post('/', async(req, res) => {
+router.get('/:term', async(req, res) => {
   try {
 
-    const item = req.body.userInput;
+    const item = req.params.term;
+    console.log("gpt called", item)
+
     const prompt = `FOLLOW INSTRUCTIONS RELIGIOUSLY.
-        Respond with the category ID, name, and user input in a JSON object exactly like this '{"category": "Movies", "userInput": "Saw"}' If more than one option applies, respond with the best. If none apply, respond null. If a category is not in the list, respond with a suggested category that best describes the prompt. (Prompt: The Office / Response:'{"category": "TV Shows", "userInput": "The Office").
+        Out of the categories given below, respond with one that is very relevant to the prompt. If more than one option applies, respond with the best. If none are very relevant, respond with a new suggested category that broadly describes the prompt. If you cannot find or come up with an appropriate category, respond with ''. (Example prompt: 'The Office', Your Response: 'TV Shows').
         Options to choose from:
         Movies
         Eat
@@ -44,10 +45,12 @@ router.post('/', async(req, res) => {
         "`;
     // request to GPT for the category
     const category = await queryOpenAI(prompt);
+    console.log(category)
 
     res.json({ category });
 
   } catch (error) {
+    console.error("Error:", error);
     res.status(500).json({ error: 'Failed to categorize item' });
   }
 });

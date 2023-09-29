@@ -40,11 +40,13 @@ router.post('/', async (req, res) => {
 
   const userInputCategoryId = parseInt(req.body.categoryId);
 
+  console.log(req.body);
+  console.log(userId);
+
   getCategoriesIDForUser(userId)
     .then((ids) => {
-      console.log("ids:", ids);
-      // Extract the IDs
       const categoryIdsArray = ids.map(catObj => catObj.categoryid);
+      console.log("returned cats", categoryIdsArray);
 
       if (categoryIdsArray.includes(userInputCategoryId)) {
         return itemsQueries.addItem(userInputCategoryId, req.body.userInput);
@@ -52,6 +54,7 @@ router.post('/', async (req, res) => {
         return addCategory(userId, req.body.category)
           .then((result) => {
             // res.send(result);
+            console.log("add cat result", result);
             const newCategoryId = result.id;
             return itemsQueries.addItem(newCategoryId, req.body.userInput);
           })

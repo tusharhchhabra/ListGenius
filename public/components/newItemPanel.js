@@ -5,9 +5,9 @@ $(() => {
 
   function generateSuggestedCategoriesHtml(categoryNames) {
     return categoryNames.map(name => `
-        <button class="suggested-category-button">
+        <div class="suggested-category-button">
           ${name}
-        </button>
+        </div>
       `
     ).join("\n");
   }
@@ -25,25 +25,35 @@ $(() => {
   // Clicking a category to set it as the preferred category
   $main.on("click", ".suggested-category-button", function() {
     const categoryName = $(this).data("name");
-    const category = categories.find(category => category.name === categoryName);
+    const category = window.categories.categoryObjs.find(category => category.name === categoryName);
     window.newItemPanel.selectedCategory = category;
   });
 
+  let isFetchingCategory = false;
 
-  $main.on('input', "new-item-title", function() {
+  $main.off('input', '#new-item-title').on('input', "#new-item-title", function() {
+    console.log("hello");
+
     clearTimeout(timer);
 
     const inputValue = $(this).val();
 
     timer = setTimeout(() => {
-      categorize(inputValue)
-        .then(suggestedCategories => {
+      if (isFetchingCategory) {
+        return;
+      }
+      isFetchingCategory = true;
 
+      categorize(inputValue)
+        .then(response => {
+          addSuggestedCategoriesView([response.category])
+          isFetchingCategory = false;
         })
         .catch((error) => {
           console.error('API call failed:', error);
+          isFetchingCategory = false
         });
-    }, 500);
+    }, 1000);
   });
 
 
