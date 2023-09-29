@@ -22,18 +22,12 @@
 }
 
 #name {
-  background-color: lightgray;
   width: 25%;
   height: 32px;
-  /* display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  flex-direction: row; */
 }
 
 #email {
-  background-color: lightgray;
-  margin-top: 20px;
+  margin-top: 10px;
   width: 25%;
   height: 32px;
 }
@@ -50,4 +44,30 @@
   margin-top: 80px;
   margin-right: 19px;
   width: 70px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  line-height: 25px;
+  font-size: 21px;
+  font-weight: 500;
+  border-radius: 6px;
+  -webkit-appearance: none;
+  color: #202123;
+  border: 1px solid #CDD9ED;
+  background: #fff;
+  background-color: #efefff;
+  transition: border .3s ease;
+}
+
+input::placeholder {
+  color: #CBD1DC;
+}
+
+input:focus {
+  outline: none;
+  border-color: #9C3AFF;
+  border-width: 2px;
 }
