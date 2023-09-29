@@ -1,7 +1,7 @@
 List Genius
 =========
 
-Introducing ListGenius, the smart solution for everyone who has a wish list of items. Here's how it makes a difference:
+Introducing List Genius, the smart solution for everyone who has a wish list of items. Here's how it makes a difference:
 
 1. **Auto-Categorization**: By harnessing the capabilities of AI, List Genius swiftly and accurately categorizes your wish list items. No more pondering over where to place an item - the AI has it sorted.
 
