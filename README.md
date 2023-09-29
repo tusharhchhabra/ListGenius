@@ -13,8 +13,8 @@ Discover the simplicity of list-making with List Genius, where AI meets everyday
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information 
-  - username: `labber` 
-  - password: `labber` 
+  - username: `username` 
+  - password: `password` 
   - database: `database`
   - OPENAI_API_KEY=(Your openAi API key here)
 3. Install dependencies: `npm i`
