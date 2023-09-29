@@ -42,7 +42,7 @@ const authenticate = require("./routes/authenticate");
 const userApiRoutes = require('./routes/users-api');
 const categoriesApiRoutes = require('./routes/categories-api');
 const itemsApiRoutes = require('./routes/items-api');
-const gptApiRoutes = require('./routes/catergorize-api');
+const gptApiRoutes = require('./routes/categorize-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
