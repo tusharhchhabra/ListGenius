@@ -9,7 +9,7 @@ $(() => {
         <div class="category-div" data-id="${category.id}">
           ${category.name}
           <div class="item-count">
-            5 Items
+            ${category.total_items} items
           </div>
         </div>
       </li>`;
