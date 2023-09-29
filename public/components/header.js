@@ -75,7 +75,7 @@ $(() => {
   });
 
   // Login button action
-  $header.on('click', '#profile-link', () => {
+  $header.on('click', '#user-profile-link', () => {
     window.userProfile.update(currentUser);
     views_manager.show("profile");
   });
