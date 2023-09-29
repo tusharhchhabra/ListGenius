@@ -26,9 +26,7 @@ $(() => {
     const currentCategory = categories.find(category => category.id === currentCategoryId)
     console.log(currentCategory);
     let previousCount = parseInt(currentCategory.total_items);
-    while (previousCount > 0) {
-      previousCount--;
-    }
+    previousCount--;
     currentCategory.total_items = previousCount + "";
     window.categories.update(window.categories.categoryObjs);
 
