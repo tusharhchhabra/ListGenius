@@ -35,12 +35,24 @@ $(() => {
   // Update category on click, then take user to the new category
   $main.on("click", ".assign-category-div", function() {
     const categoryId = $(this).data("id");
+
     const category = categories.categoryObjs.find(category => category.id === categoryId);
+    
     const item = window.items.itemToEdit;
+    const previousCategoryId = item.categories_id;
+
     item.categories_id = categoryId;
 
     updateItem(item)
       .then(function() {
+        const previousCategory = window.categories.categoryObjs.find(category => category.id === previousCategoryId);
+        let previousCount = parseInt(previousCategory.total_items);
+        previousCount--;
+        previousCategory.total_items = previousCount + "";
+        let currentCount = parseInt(category.total_items);
+        currentCount++;
+        category.total_items = currentCount+"";
+        window.categories.update(window.categories.categoryObjs);
         return getItemsForCategory(categoryId);
       })
       .then(function(response) {
