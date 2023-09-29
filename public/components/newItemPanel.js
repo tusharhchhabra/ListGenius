@@ -5,7 +5,7 @@ $(() => {
 
   function generateSuggestedCategoriesHtml(categoryNames) {
     return categoryNames.map(name => `
-        <div class="suggested-category-button">
+        <div class="suggested-category-button" data-name="${name}">
           ${name}
         </div>
       `
@@ -25,12 +25,10 @@ $(() => {
   // Clicking a category to set it as the preferred category
   $main.on("click", ".suggested-category-button", function() {
     const categoryName = $(this).data("name");
-    const category = window.categories.categoryObjs.find(category => category.name === categoryName);
-    window.newItemPanel.selectedCategory = category;
   });
 
-  let isFetchingCategory = false;
 
+  let isFetchingCategory = false;
   $main.off('input', '#new-item-title').on('input', "#new-item-title", function() {
     console.log("hello");
 
@@ -48,6 +46,7 @@ $(() => {
         .then(response => {
           addSuggestedCategoriesView([response.category])
           isFetchingCategory = false;
+          window.newItemPanel.selectedCategoryName = categoryName;
         })
         .catch((error) => {
           console.error('API call failed:', error);
@@ -60,13 +59,10 @@ $(() => {
   // Clicking the Done button saves the item
   $main.on("click", "#save-item-button", function() {
     const itemTitle = $main.find("#new-item-title").val();
-    const item = {
-      owner_id: currentUser.id,
-      categories_id: newItemPanel.selectedCategory ? (newItemPanel.selectedCategory.id || 0) : 0,
-      name: itemTitle
-    };
+    const categoryName = newItemPanel.selectedCategoryName
+    const category = window.categories.find(category => category.name === selectedCategoryName)
 
-    addItem(item)
+    addItem(itemTitle, category["id"], categoryName)
       .then(() => {
         getItemsForCategory(categoryId);
       })
