@@ -22,18 +22,9 @@ $(() => {
         </div>
         <section id="profile-section">
           <button id="user-profile-link">
-            <span>${user.name}</span>
+            <span>Logged in as: ${user.name}</span>
           </button>
-          <i class="fa-solid fa-circle-user" style="
-          margin: 10px;
-    margin-right: -7px;
-    font-size: xxx-large;
-    border-radius: 50px;
-    display: flex;
-    width: 65px;
-    color: #9C3AFF;
-    flex-direction: column;
-    align-items: flex-start;"></i>
+          <i class="fa-solid fa-circle-user"></i>
           <span id="logout-button">Logout</span>
         </div>
       </nav>
