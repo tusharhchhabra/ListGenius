@@ -24,7 +24,16 @@ $(() => {
           <button id="user-profile-link">
             <span>${user.name}</span>
           </button>
-          <i class="fa-solid fa-circle-user" style="color: #a94ae8; margin: 8px; margin-right: 8px;"></i>
+          <i class="fa-solid fa-circle-user" style="
+          margin: 10px;
+    margin-right: -7px;
+    font-size: xxx-large;
+    border-radius: 50px;
+    display: flex;
+    width: 65px;
+    color: #9C3AFF;
+    flex-direction: column;
+    align-items: flex-start;"></i>
           <span id="logout-button">Logout</span>
         </div>
       </nav>
@@ -39,7 +48,7 @@ $(() => {
   }
 
   // Clicking the logo takes the user to Categories
-  $header.on("click", "#logo-button", function() {
+  $header.on("click", "#logo-button", function () {
     if (currentUser) {
       views_manager.show("categories");
     } else {
