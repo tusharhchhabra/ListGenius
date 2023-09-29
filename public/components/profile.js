@@ -11,7 +11,7 @@ $(() => {
         <input id="name" placeholder="Name" value="${user.name}">
         <input id="email" placeholder="Email Address" value="${user.email_address}">
       </div>
-      <button class="save-profile-button">Save</button>
+      <button class="save-profile-button">SAVE</button>
     </div>`;
   }
 
