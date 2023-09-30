@@ -37,11 +37,11 @@ Discover the effortless way of managing your wish lists, powered by AI.
 
 ## Demo
 ### New Item Auto Categorization
-![New Item Auto Categorization](https://github.com/tusharhchhabra/smarttodolist-btc/blob/develop/public/assets/gifs/ListGenius-NewItems.gif?raw=true)
+![New Item Auto Categorization](https://github.com/tusharhchhabra/smarttodolist-btc/blob/develop/public/assets/gifs/ListGenius-NewItemsBest.gif?raw=true)
 ### Update Item Category
 ![Update Item Category](https://github.com/tusharhchhabra/smarttodolist-btc/blob/develop/public/assets/gifs/ListGenius-UpdateItems.gif?raw=true)
 ### Profile Update
-![Profile Update](https://github.com/tusharhchhabra/smarttodolist-btc/blob/develop/public/assets/gifs/ListGenius-ProfileUpdate.gif?raw=true)
+![Profile Update](https://github.com/tusharhchhabra/smarttodolist-btc/blob/develop/public/assets/gifs/ListGenius-ProfileUpdateBest.gif?raw=true)
 
 ## Warnings & Tips
 - Please note that this project was developed in a span of 7 days for learning purposes. It lacks a comprehensive login/authentication mechanism, does not offer privacy features, and does not adhere to industry standards regarding password encryption. 
