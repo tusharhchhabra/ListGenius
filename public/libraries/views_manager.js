@@ -14,7 +14,7 @@ $(() => {
   window.$newItemPanel = $(`
     <div id="new-item">
       <span class="new-item-content-heading">New Item</span>
-      <input id="new-item-title" placeholder="Enter item">
+      <input id="new-item-title" placeholder="Enter item" autocomplete="off">
       <div id="suggested-categories"></div>
       <div id="save-item-button">Done</div>
     </div>

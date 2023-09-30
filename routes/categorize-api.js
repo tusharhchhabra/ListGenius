@@ -29,6 +29,7 @@ async function queryOpenAI(promptContent) {
 }
 
 router.get('/:term', async(req, res) => {
+  console.log("GPT called");
   try {
 
     const item = req.params.term;
@@ -42,6 +43,9 @@ router.get('/:term', async(req, res) => {
         Buy
         Travel
         Technology
+        Video Games
+        Pets
+        Coding
         Prompt: ${item}
         "`;
     // request to GPT for the category
