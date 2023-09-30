@@ -20,12 +20,12 @@ $(() => {
         <div id="logo-button">
           <img src="assets/logo.png" />
         </div>
-        <section id="profile-section">
+        <div id="profile-section">
           <button id="user-profile-link">
             <span>Logged in as: ${user.name}</span>
+            <i class="fa-solid fa-circle-user"></i>
           </button>
-          <i class="fa-solid fa-circle-user"></i>
-          <span id="logout-button">Logout</span>
+          <button id="logout-button">Logout</button>
         </div>
       </nav>
     `;

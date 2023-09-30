@@ -22,10 +22,10 @@ $(() => {
   window.$assignCategoryPanel = $(`<div id="assign-category"></div>`);
   window.$profile = $(`<div id="profile"></div>`);
   window.$home = $(`
-    <div>
-      <h1>Your magical wish list</h1>
+    <div class="home">
+      <h1>Your magical wish list.</h1>
       <h2>Powered by AI</h2>
-      <button id="get-started-button">GET STARTED</button>
+      <div id="get-started-button">GET STARTED</div>
     </div>
   `);
 

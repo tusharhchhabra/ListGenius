@@ -1,4 +1,4 @@
-#categories, #assign-categories {
+#categories, #assign-categories, #new-item, #profile {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -24,7 +24,6 @@ ul {
   font-weight: bold;
   gap: 8px;
   max-width: 820px;
-  /* background-color: red; */
 }
 
 li:hover {
